@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Site Map for Alberto Watch Company. Easily navigate through all our pages, collections, and support services.">
+  <title>Site Map | Alberto Watch Company</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+
+  <!-- GSAP & ScrollTrigger Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+
+  <style>
+    
+    /* Theme Variables */
+    :root {
+      --red: #A52A3A;
+      --red-hover: #84212f;
+      --rose: #D48C96;
+      --steel: #454A53;
+      --pearl: #F3F3F5;
+      --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    [data-theme=dark] {
+      --bg: #1B1D22;
+      --card: #292C32;
+      --text: #F3F3F5;
+      --muted: #B7B8BF;
+      --line: #454A53;
+      --nav: rgba(27, 29, 34, 0.9);
+      --glass: rgba(255, 255, 255, 0.03);
+    }
+
+    [data-theme=light] {
+      --bg: #F3F3F5;
+      --card: #fff;
+      --text: #1B1D22;
+      --muted: #626671;
+      --line: #D7D7DC;
+      --nav: rgba(243, 243, 245, 0.9);
+      --glass: rgba(0, 0, 0, 0.02);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      transition: background .3s, color .3s;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4, .brand {
+      font-family: 'Playfair Display', serif;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+      transition: var(--transition-smooth);
+    }
+
+    a:hover {
+      color: var(--rose);
+    }
+
+    button {
+      cursor: pointer;
+      border: none;
+      background: none;
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--rose);
+      outline-offset: 3px;
+    }
+
+    .section {
+      padding: 95px 0;
+    }
+
+    .eyebrow {
+      font-size: 11px;
+      color: var(--rose);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .heading {
+      font-size: clamp(35px, 4vw, 60px);
+      margin: 12px 0 20px;
+    }
+
+    .muted {
+      color: var(--muted);
+      line-height: 1.85;
+    }
+
+    /* Standardized Navigation Bar */
+    .site-header {
+      position: fixed;
+      z-index: 1050;
+      top: 0;
+      width: 100%;
+      background: var(--nav);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      transition: var(--transition-smooth);
+    }
+
+    .nav-wrap {
+      min-height: 85px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      font-size: 26px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      line-height: 1;
+    }
+
+    .brand span {
+      color: var(--red);
+    }
+
+    .brand small {
+      display: block;
+      font: 8px 'DM Sans', sans-serif;
+      letter-spacing: 4px;
+      text-align: center;
+      margin-top: 6px;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    .nav-main {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+    }
+
+    .nav-main > a, .nav-drop-toggle {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 30px 0;
+      display: block;
+      color: var(--text);
+      background: transparent;
+      border: 0;
+    }
+
+    .nav-main .active, .nav-main > a:hover, .nav-drop-toggle:hover, .nav-drop-toggle[aria-expanded="true"] {
+      color: var(--red);
+    }
+
+    .nav-drop {
+      position: relative;
+    }
+
+    .drop-panel {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      min-width: 200px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      padding: 10px;
+      display: none;
+      box-shadow: 0 20px 35px rgba(0, 0, 0, 0.15);
+      z-index: 1100;
+      border-radius: 4px;
+    }
+
+    .nav-drop:hover .drop-panel, .nav-drop.is-open .drop-panel {
+      display: block;
+    }
+
+    .drop-panel a {
+      display: block;
+      padding: 10px 14px;
+      font-size: 12px;
+      border-radius: 2px;
+    }
+
+    .drop-panel a:hover {
+      background: var(--bg);
+      color: var(--red);
+    }
+
+    .nav-drop-toggle i {
+      font-size: 10px;
+      margin-left: 4px;
+      display: inline-block;
+      transition: transform 0.2s;
+    }
+
+    .nav-drop-toggle[aria-expanded="true"] i {
+      transform: rotate(180deg);
+    }
+
+    .nav-tools {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .icon-btn {
+      border: 0;
+      background: var(--glass);
+      color: var(--text);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      font-size: 18px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition-smooth);
+    }
+
+    .icon-btn:hover {
+      background: var(--line);
+      color: var(--red);
+    }
+
+    .cart-badge {
+      position: absolute;
+      top: 2px;
+      right: 2px;
+      background: var(--red);
+      color: white;
+      border-radius: 50%;
+      font: 10px 'DM Sans', sans-serif;
+      padding: 2px 6px;
+      font-weight: 700;
+    }
+
+    .cart-badge[hidden] {
+      display: none !important;
+    }
+
+    .mobile-btn {
+      display: none;
+    }
+
+    /* Offcanvas */
+    .offcanvas {
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    .offcanvas-header {
+      border-bottom: 1px solid var(--line);
+      padding: 20px;
+    }
+
+    .offcanvas-body a {
+      display: block;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--line);
+      font-weight: 600;
+    }
+
+    .mobile-accordion {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: 14px 0;
+      background: transparent;
+      border: 0;
+      border-bottom: 1px solid var(--line);
+      color: var(--text);
+      font-weight: 600;
+      text-align: left;
+    }
+
+    .mobile-accordion i {
+      transition: transform 0.2s;
+    }
+
+    .mobile-accordion[aria-expanded="true"] {
+      color: var(--rose);
+    }
+
+    .mobile-accordion[aria-expanded="true"] i {
+      transform: rotate(180deg);
+    }
+
+    .mobile-submenu {
+      padding-left: 18px;
+    }
+
+    .mobile-submenu a {
+      font-size: 13px;
+      color: var(--muted);
+      border-bottom: none;
+      padding: 10px 0;
+    }
+
+    /* Buttons */
+    .btn-red, .btn-line {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 24px;
+      font-size: 12px;
+      letter-spacing: 1.3px;
+      text-transform: uppercase;
+      font-weight: 700;
+      transition: var(--transition-smooth);
+      border: 1px solid var(--red);
+      border-radius: 4px;
+    }
+
+    .btn-red {
+      background: var(--red);
+      color: white;
+    }
+
+    .btn-red:hover {
+      background: var(--red-hover);
+      color: white;
+      transform: translateY(-3px);
+    }
+
+    .btn-line {
+      background: transparent;
+      color: inherit;
+      border-color: currentColor;
+    }
+
+    .btn-line:hover {
+      background: var(--red);
+      border-color: var(--red);
+      color: white;
+    }
+
+    /* Hero Section */
+    .sitemap-hero {
+      padding: 150px 0 65px;
+      background: radial-gradient(ellipse at 85% 20%, #a52a3a22, transparent 42%), var(--bg);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .sitemap-hero h1 {
+      font-size: clamp(48px, 7vw, 82px);
+      line-height: 1.05;
+      margin: 15px 0;
+    }
+
+    .sitemap-hero p {
+      max-width: 600px;
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.9;
+    }
+
+    /* Sitemap Grid & Cards */
+    .sitemap-card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      padding: 32px;
+      border-radius: 4px;
+      height: 100%;
+      transition: var(--transition-smooth);
+    }
+
+    .sitemap-card:hover {
+      border-color: var(--red);
+      transform: translateY(-5px);
+    }
+
+    .sitemap-icon {
+      display: inline-grid;
+      place-items: center;
+      width: 48px;
+      height: 48px;
+      background: var(--bg);
+      border: 1px solid var(--line);
+      color: var(--rose);
+      font-size: 20px;
+      border-radius: 4px;
+      margin-bottom: 20px;
+    }
+
+    .sitemap-card h3 {
+      font-size: 24px;
+      margin-bottom: 15px;
+    }
+
+    .sitemap-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .sitemap-list li {
+      margin-bottom: 12px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .sitemap-list li:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+
+    .sitemap-list a {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 14px;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    .sitemap-list a:hover {
+      color: var(--red);
+      padding-left: 5px;
+    }
+
+    .sitemap-list a i {
+      font-size: 12px;
+      opacity: 0;
+      transition: var(--transition-smooth);
+    }
+
+    .sitemap-list a:hover i {
+      opacity: 1;
+      transform: translateX(3px);
+    }
+
+    /* Scroll Progress & Back to Top */
+    .scroll-progress {
+      position: fixed;
+      z-index: 1200;
+      top: 0;
+      left: 0;
+      height: 2px;
+      width: 0;
+      background: linear-gradient(90deg, var(--red), var(--rose));
+      box-shadow: 0 0 12px rgba(212,140,150,.65);
+      pointer-events: none;
+    }
+
+    .back-to-top {
+      position: fixed;
+      z-index: 1040;
+      right: 24px;
+      bottom: 24px;
+      width: 46px;
+      height: 46px;
+      border: 1px solid var(--rose);
+      border-radius: 50%;
+      color: white;
+      background: var(--red);
+      display: grid;
+      place-items: center;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(14px);
+      transition: all .4s cubic-bezier(.2,.75,.25,1);
+      box-shadow: 0 10px 28px rgba(0,0,0,.2);
+    }
+
+    .back-to-top.is-visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .back-to-top:hover {
+      transform: translateY(-5px);
+      background: var(--red-hover);
+    }
+
+    /* Footer */
+    footer {
+      background: #15161A;
+      color: #F3F3F5;
+      padding: 75px 0 0;
+      border-top: 1px solid var(--line);
+    }
+
+    footer h4 {
+      font: 700 12px 'DM Sans', sans-serif;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 22px;
+      color: var(--rose);
+    }
+
+    footer p, footer a {
+      font-size: 13px;
+      color: #a7a8ae;
+      line-height: 1.9;
+    }
+
+    footer a:hover {
+      color: var(--rose);
+    }
+
+    footer ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    footer li {
+      margin-bottom: 10px;
+    }
+
+    .social a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid #454A53;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      margin-right: 7px;
+      color: white;
+      transition: var(--transition-smooth);
+    }
+
+    .social a:hover {
+      background: var(--red);
+      border-color: var(--red);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      margin-top: 55px;
+      padding: 22px 0;
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    .ticker {
+      background: var(--red);
+      color: white;
+      padding: 10px 16px;
+      text-align: center;
+      font-size: 11px;
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+      letter-spacing: 0.5px;
+    }
+
+    .ticker button {
+      background: transparent;
+      color: white;
+      border: 0;
+      text-decoration: underline;
+      font-size: 11px;
+    }
+
+    @media(max-width:1199px) {
+      .nav-main { gap: 12px; }
+      .nav-main > a, .nav-drop-toggle { font-size: 10px; }
+    }
+
+    @media(max-width:991px) {
+      .nav-main { display: none; }
+      .mobile-btn { display: flex; }
+      .sitemap-hero { padding-top: 130px; }
+    }
+  
+  </style>
+</head>
+
+<body>
+
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+  <!-- Standard Header -->
+  <header class="site-header">
+    <div class="container-fluid px-3 px-xl-5 nav-wrap">
+      <a href="index.html" class="brand" aria-label="Alberto Watch home">
+        ALBERTO<span>.</span>
+        <small>WATCH COMPANY</small>
+      </a>
+
+      <nav class="nav-main" aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <div class="nav-drop">
+          <button type="button" class="nav-drop-toggle" aria-expanded="false" aria-controls="collectionsDropdown">
+            All Collections <i class="bi bi-chevron-down"></i>
+          </button>
+          <div class="drop-panel" id="collectionsDropdown">
+            <a href="collections.html">All Collections</a>
+            <a href="luxury.html">Luxury</a>
+            <a href="vintage.html">Vintage</a>
+            <a href="smart.html">Smart Watches</a>
+            <a href="classic.html">Classic</a>
+            <a href="clocks.html">Clocks</a>
+          </div>
+        </div>
+        <a href="technology.html">Technology</a>
+        <a href="craftsmanship.html">Craftsmanship</a>
+        <a href="ourstory.html">Our Story</a>
+        <a href="storelocator.html">Store Locator</a>
+        <div class="nav-drop">
+          <button type="button" class="nav-drop-toggle" aria-expanded="false" aria-controls="supportDropdown">
+            Support <i class="bi bi-chevron-down"></i>
+          </button>
+          <div class="drop-panel" id="supportDropdown">
+            <a href="support.html">Help &amp; Support</a>
+            <a href="contact.html">Contact Us</a>
+            <a href="repair.html">Watch Repair</a>
+            <a href="support.html#faq">FAQs</a>
+          </div>
+        </div>
+      </nav>
+
+      <div class="nav-tools">
+        <button class="icon-btn" id="searchBtn" aria-label="Search"><i class="bi bi-search"></i></button>
+        <button class="icon-btn" id="themeBtn" aria-label="Switch theme"><i class="bi bi-sun"></i></button>
+        <a class="icon-btn" href="cart.html" aria-label="Cart">
+          <i class="bi bi-bag"></i>
+          <span class="cart-badge" id="cartCount" hidden>0</span>
+        </a>
+        <button class="icon-btn mobile-btn" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu" aria-label="Open menu">
+          <i class="bi bi-list"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Offcanvas Menu -->
+  <div class="offcanvas offcanvas-end" id="mobileMenu" tabindex="-1" aria-label="Mobile navigation">
+    <div class="offcanvas-header">
+      <strong class="brand">ALBERTO<span>.</span></strong>
+      <button class="icon-btn" data-bs-dismiss="offcanvas" aria-label="Close menu"><i class="bi bi-x-lg"></i></button>
+    </div>
+    <div class="offcanvas-body">
+      <a href="index.html">Home</a>
+
+      <button type="button" class="mobile-accordion" data-bs-toggle="collapse" data-bs-target="#mobileCollections" aria-expanded="false" aria-controls="mobileCollections">
+        All Collections <i class="bi bi-chevron-down"></i>
+      </button>
+      <div class="collapse mobile-submenu" id="mobileCollections">
+        <a href="collections.html">View All Collections</a>
+        <a href="luxury.html">Luxury</a>
+        <a href="vintage.html">Vintage</a>
+        <a href="smart.html">Smart Watches</a>
+        <a href="classic.html">Classic</a>
+        <a href="clocks.html">Clocks</a>
+      </div>
+
+      <a href="technology.html">Technology</a>
+      <a href="craftsmanship.html">Craftsmanship</a>
+      <a href="ourstory.html">Our Story</a>
+      <a href="storelocator.html">Store Locator</a>
+
+      <button type="button" class="mobile-accordion" data-bs-toggle="collapse" data-bs-target="#mobileSupport" aria-expanded="false" aria-controls="mobileSupport">
+        Support <i class="bi bi-chevron-down"></i>
+      </button>
+      <div class="collapse mobile-submenu" id="mobileSupport">
+        <a href="support.html">Help &amp; Support</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="repair.html">Watch Repair</a>
+        <a href="support.html#faq">FAQs</a>
+      </div>
+    </div>
+  </div>
+
+  <button class="back-to-top" id="backToTop" aria-label="Back to top"><i class="bi bi-arrow-up"></i></button>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="sitemap-hero">
+      <div class="container">
+        <span class="eyebrow">Alberto Watch Company / Navigation</span>
+        <h1>Site <em style="color:var(--rose);font-weight:400">Map.</em></h1>
+        <p>Explore the full structure of our website. Access collections, brand stories, customer care, and legal information in one place.</p>
+      </div>
+    </section>
+
+    <!-- Sitemap Content Section -->
+    <section class="section" style="padding-top:60px">
+      <div class="container">
+        <div class="row g-4">
+          
+          <!-- Category 1: Main Pages -->
+          <div class="col-lg-4 col-md-6">
+            <div class="sitemap-card">
+              <span class="sitemap-icon"><i class="bi bi-compass"></i></span>
+              <h3>Main Navigation</h3>
+              <ul class="sitemap-list">
+                <li><a href="index.html">Home Page <i class="bi bi-arrow-right"></i></a></li>
+                <li><a href="ourstory.html">Our Story <i class="bi bi-arrow-right"></i></a></li>
+                <li><a href="craftsmanship.html">Craftsmanship <i class="bi bi-arrow-right"></i></a></li>
+                <li><a href="technology.html">Technology & Innovation <i class="bi bi-arrow-right"></i></a></li>
+                <li><a href="gallery.html">Visual Gallery <i class="bi bi-arrow-right"></i></a></li>
+                <li><a href="storelocator.html">Store Locator <i class="bi bi-arrow-right"></i></a></li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Category 2: Watch Collections -->
+          <div class="col-lg-4 col-md-6">
+            <div class="sitemap-card">
+              <span class="sitemap-icon"><i class="bi bi-watch"></i></span>
+              <h3>Timepiece Collections</h3>
+              <ul class="sitemap-list">
+                <li><a href="collections.html">All Collections <i class="bi bi-arrow-right"></i></a></li>
+                <li><a href="luxury.html">Luxury Collection <i class="bi bi-arrow-right"></i></a></li>
+                <li><a href="vintage.html">Vintage Collection <i class="bi bi-arrow-right"></i></a></li>
+                <li><a href="smart.html">Smart Watches <i class="bi bi-arrow-right"></i></a></li>
+                <li><a href="classic.html">Classic Series <i class="bi bi-arrow-right"></i></a></li>
+                <li><a href="clocks.html">Clocks Collection <i class="bi bi-arrow-right"></i></a></li>
+                <li><a href="pricelist.html">Complete Price List <i class="bi bi-arrow-right"></i></a></li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Category 3: Customer Care & Shopping -->
+          <div class="col-lg-4 col-md-6">
+            <div class="sitemap-card">
+              <span class="sitemap-icon"><i class="bi bi-bag-check"></i></span>
+              <h3>Shopping & Support</h3>
+              <ul class="sitemap-list">
+                <li><a href="cart.html">Shopping Cart <i class="bi bi-arrow-right"></i></a></li>
+                <li><a href="checkout.html">Secure Checkout <i class="bi bi-arrow-right"></i></a></li>
+                <li><a href="support.html">Help & Support <i class="bi bi-arrow-right"></i></a></li>
+                <li><a href="repair.html">Watch Repair & Service <i class="bi bi-arrow-right"></i></a></li>
+                <li><a href="contact.html">Contact Us <i class="bi bi-arrow-right"></i></a></li>
+                <li><a href="support.html#faq">Frequently Asked Questions <i class="bi bi-arrow-right"></i></a></li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Category 4: Legal & Information -->
+          <div class="col-lg-4 col-md-6">
+            <div class="sitemap-card">
+              <span class="sitemap-icon"><i class="bi bi-shield-check"></i></span>
+              <h3>Legal & Policies</h3>
+              <ul class="sitemap-list">
+                <li><a href="privacy.html">Privacy Policy <i class="bi bi-arrow-right"></i></a></li>
+                <li><a href="terms.html">Terms & Conditions <i class="bi bi-arrow-right"></i></a></li>
+                <li><a href="sitemap.html" style="color:var(--red)">Site Map (Current) <i class="bi bi-arrow-right"></i></a></li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="row g-5">
+        <div class="col-lg-4 col-md-6">
+          <a class="brand" href="index.html" style="color:white">ALBERTO<span>.</span></a>
+          <p class="mt-4">Discover exceptional timepieces. Luxury, craftsmanship and innovation come together in the Alberto Watch experience.</p>
+          <div class="social">
+            <a href="https://www.instagram.com/" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+            <a href="https://www.facebook.com/" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+            <a href="https://www.pinterest.com/" aria-label="Pinterest"><i class="bi bi-pinterest"></i></a>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-6 col-6">
+          <h4>Explore</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="collections.html">Collections</a></li>
+            <li><a href="technology.html">Technology</a></li>
+            <li><a href="craftsmanship.html">Craftsmanship</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="pricelist.html">Price List</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-md-6 col-6">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="ourstory.html">Our Story</a></li>
+            <li><a href="storelocator.html">Store Locator</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="sitemap.html">Site Map</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <h4>Customer Care</h4>
+          <ul>
+            <li><a href="support.html">Help &amp; Support</a></li>
+            <li><a href="repair.html">Watch Repair</a></li>
+            <li><a href="support.html#faq">Frequently Asked Questions</a></li>
+            <li><a href="contact.html">Contact Our Team</a></li>
+          </ul>
+          <p class="mt-3">Your journey with Alberto continues beyond the purchase of a timepiece.</p>
+        </div>
+      </div>
+      <div class="footer-bottom d-flex flex-wrap justify-content-between gap-2">
+        <span>© <span id="year"></span> Alberto Watch Company. All rights reserved.</span>
+        <span><a href="privacy.html">Privacy Policy</a> &nbsp; | &nbsp; <a href="terms.html">Terms &amp; Conditions</a></span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Ticker Bar -->
+  <div class="ticker">
+    <span><i class="bi bi-calendar3"></i> <span id="date"></span></span>
+    <span><i class="bi bi-clock"></i> <span id="time"></span></span>
+    <span><i class="bi bi-geo-alt"></i> <span id="location">Location not requested</span></span>
+    <button id="locationBtn">Enable Location</button>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+ 
+  <script>
+    
+    $(function () {
+      const root = document.documentElement;
+
+      function applyTheme(t) {
+        root.dataset.theme = t;
+        localStorage.setItem('albertoTheme', t);
+        $('#themeBtn')
+          .html(t === 'dark' ? '<i class="bi bi-sun"></i>' : '<i class="bi bi-moon-stars"></i>')
+          .attr('aria-label', t === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+      }
+
+      applyTheme(localStorage.getItem('albertoTheme') === 'light' ? 'light' : 'dark');
+      $('#themeBtn').on('click', () => applyTheme(root.dataset.theme === 'dark' ? 'light' : 'dark'));
+
+      function updateCartCount() {
+        try {
+          const cart = JSON.parse(localStorage.getItem('albertoCart') || '[]');
+          const count = Array.isArray(cart) ? cart.reduce((n, p) => n + (Number(p.quantity) || 0), 0) : 0;
+          $('#cartCount').text(count).prop('hidden', count === 0);
+        } catch(e) {
+          $('#cartCount').prop('hidden', true);
+        }
+      }
+      updateCartCount();
+      $(window).on('storage focus', updateCartCount);
+
+      // Dropdowns Handler
+      $('.nav-drop-toggle').on('click', function(e) {
+        e.stopPropagation();
+        const parent = $(this).closest('.nav-drop'), wasOpen = parent.hasClass('is-open');
+        $('.nav-drop').removeClass('is-open').find('.nav-drop-toggle').attr('aria-expanded', 'false');
+        if (!wasOpen) {
+          parent.addClass('is-open');
+          $(this).attr('aria-expanded', 'true');
+        }
+      });
+
+      $(document).on('click keydown', function(e) {
+        if (e.type === 'keydown' && e.key !== 'Escape') return;
+        if (!$(e.target).closest('.nav-drop').length) {
+          $('.nav-drop').removeClass('is-open').find('.nav-drop-toggle').attr('aria-expanded', 'false');
+        }
+      });
+
+      /* ===== GSAP CINEMATIC SCROLL ANIMATIONS ===== */
+      const motionReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      if (window.gsap && window.ScrollTrigger && !motionReduced) {
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Hero Intro Animation
+        const tl = gsap.timeline({ defaults: { ease: 'power4.out' } });
+        tl.fromTo('.sitemap-hero .eyebrow', { y: 25, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8 }, .1)
+          .fromTo('.sitemap-hero h1', { y: 55, opacity: 0, rotateX: -10 }, { y: 0, opacity: 1, rotateX: 0, duration: 1.1 }, .3)
+          .fromTo('.sitemap-hero p', { y: 25, opacity: 0 }, { y: 0, opacity: 1, duration: .8 }, .5);
+
+        // Scroll reveals for cards and elements
+        const cinematicTargets = document.querySelectorAll('.sitemap-card, footer .row > div');
+        cinematicTargets.forEach((el, i) => {
+          gsap.set(el, { autoAlpha: 0, y: 35 });
+          ScrollTrigger.create({
+            trigger: el,
+            start: 'top 88%',
+            once: true,
+            onEnter: () => gsap.to(el, {
+              autoAlpha: 1, y: 0, duration: 1.05,
+              delay: (i % 3) * 0.08, ease: 'power3.out',
+              overwrite: true
+            })
+          });
+        });
+      }
+
+      /* ===== SCROLL PROGRESS & BACK TO TOP ===== */
+      const progress = document.getElementById('scrollProgress');
+      const backTop = document.getElementById('backToTop');
+      let scrollTicking = false;
+
+      function updateScrollEffects() {
+        const max = document.documentElement.scrollHeight - window.innerHeight;
+        const amount = max > 0 ? (window.scrollY / max) * 100 : 0;
+        if (progress) progress.style.width = amount + '%';
+        document.querySelector('.site-header')?.classList.toggle('is-scrolled', window.scrollY > 24);
+        backTop?.classList.toggle('is-visible', window.scrollY > 500);
+        scrollTicking = false;
+      }
+
+      window.addEventListener('scroll', () => {
+        if (!scrollTicking) {
+          requestAnimationFrame(updateScrollEffects);
+          scrollTicking = true;
+        }
+      }, { passive: true });
+      updateScrollEffects();
+
+      backTop?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: motionReduced ? 'auto' : 'smooth' }));
+
+      $('#searchBtn').on('click', function () {
+        const q = prompt('Search watch collections:');
+        if (q && q.trim()) location.href = 'collections.html?search=' + encodeURIComponent(q.trim());
+      });
+
+      function clock() {
+        const d = new Date();
+        $('#date').text(d.toLocaleDateString('en-GB', { weekday: 'short', day: '2-digit', month: 'short', year: 'numeric' }));
+        $('#time').text(d.toLocaleTimeString('en-GB'));
+      }
+      clock();
+      setInterval(clock, 1000);
+      $('#year').text(new Date().getFullYear());
+
+      $('#locationBtn').on('click', function () {
+        if (!navigator.geolocation) { $('#location').text('Not supported'); return; }
+        $('#location').text('Detecting...');
+        navigator.geolocation.getCurrentPosition(p => $('#location').text(p.coords.latitude.toFixed(2) + ', ' + p.coords.longitude.toFixed(2)), () => $('#location').text('Permission unavailable'), { timeout: 10000, maximumAge: 300000 });
+      });
+    });
+  
+  </script>
+</body>
+</html>

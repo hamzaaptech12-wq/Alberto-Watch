@@ -1,0 +1,1228 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Contact Alberto Watch for product enquiries, order support, watch repair and general assistance.">
+  <title>Alberto Watch | Contact Us</title>
+
+  <!-- CSS Links -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+
+  <!-- GSAP & ScrollTrigger Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+  <style>
+        /* Theme Variables */
+    :root {
+      --red: #A52A3A;
+      --red-hover: #84212f;
+      --rose: #D48C96;
+      --steel: #454A53;
+      --pearl: #F3F3F5;
+      --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    [data-theme="dark"] {
+      --bg: #1B1D22;
+      --card: #292C32;
+      --text: #F3F3F5;
+      --muted: #B7B8BF;
+      --line: #454A53;
+      --nav: rgba(27, 29, 34, 0.9);
+      --glass: rgba(255, 255, 255, 0.03);
+    }
+
+    [data-theme="light"] {
+      --bg: #F3F3F5;
+      --card: #FFFFFF;
+      --text: #1B1D22;
+      --muted: #626671;
+      --line: #D7D7DC;
+      --nav: rgba(243, 243, 245, 0.9);
+      --glass: rgba(0, 0, 0, 0.02);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      transition: background 0.3s ease, color 0.3s ease;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4, .brand {
+      font-family: 'Playfair Display', serif;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+      transition: var(--transition-smooth);
+    }
+
+    a:hover {
+      color: var(--rose);
+    }
+
+    button {
+      cursor: pointer;
+      border: none;
+      background: none;
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--rose);
+      outline-offset: 4px;
+    }
+
+    .section {
+      padding: 100px 0;
+    }
+
+    .eyebrow {
+      font-size: 11px;
+      color: var(--rose);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      font-weight: 700;
+      display: inline-block;
+      margin-bottom: 8px;
+    }
+
+    .heading {
+      font-size: clamp(32px, 4vw, 56px);
+      letter-spacing: -0.5px;
+      font-weight: 600;
+      margin: 10px 0 20px;
+    }
+
+    .muted {
+      color: var(--muted);
+      line-height: 1.85;
+      font-size: 0.95rem;
+    }
+
+    /* Buttons */
+    .btn-red, .btn-line {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 15px 28px;
+      font-size: 11px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      font-weight: 700;
+      transition: var(--transition-smooth);
+      border: 1px solid var(--red);
+      border-radius: 4px;
+    }
+
+    .btn-red {
+      background: var(--red);
+      color: white;
+    }
+
+    .btn-red:hover {
+      background: var(--red-hover);
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(165, 42, 58, 0.3);
+    }
+
+    .btn-line {
+      background: transparent;
+      color: inherit;
+      border-color: currentColor;
+    }
+
+    .btn-line:hover {
+      background: var(--red);
+      border-color: var(--red);
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    /* Header & Navigation */
+    .site-header {
+      position: fixed;
+      z-index: 1050;
+      top: 0;
+      width: 100%;
+      background: var(--nav);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      transition: var(--transition-smooth);
+    }
+
+    .nav-wrap {
+      min-height: 85px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      font-size: 26px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      line-height: 1;
+    }
+
+    .brand span {
+      color: var(--red);
+    }
+
+    .brand small {
+      display: block;
+      font: 8px 'DM Sans', sans-serif;
+      letter-spacing: 4px;
+      text-align: center;
+      margin-top: 6px;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    .nav-main {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+    }
+
+    .nav-main > a, .nav-drop-toggle {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 30px 0;
+      display: block;
+      color: var(--text);
+      background: transparent;
+      border: 0;
+    }
+
+    .nav-main .active, .nav-main > a:hover, .nav-drop-toggle:hover, .nav-drop-toggle[aria-expanded="true"] {
+      color: var(--red);
+    }
+
+    .nav-drop {
+      position: relative;
+    }
+
+    .drop-panel {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      min-width: 200px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      padding: 10px;
+      display: none;
+      box-shadow: 0 20px 35px rgba(0, 0, 0, 0.15);
+      z-index: 1100;
+      border-radius: 4px;
+    }
+
+    .nav-drop:hover .drop-panel, .nav-drop.is-open .drop-panel {
+      display: block;
+    }
+
+    .drop-panel a {
+      display: block;
+      padding: 10px 14px;
+      font-size: 12px;
+      border-radius: 2px;
+    }
+
+    .drop-panel a:hover {
+      background: var(--bg);
+      color: var(--red);
+    }
+
+    .nav-drop-toggle i {
+      font-size: 10px;
+      margin-left: 4px;
+      display: inline-block;
+      transition: transform 0.2s;
+    }
+
+    .nav-drop-toggle[aria-expanded="true"] i {
+      transform: rotate(180deg);
+    }
+
+    .nav-tools {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .icon-btn {
+      border: 0;
+      background: var(--glass);
+      color: var(--text);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      font-size: 18px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition-smooth);
+    }
+
+    .icon-btn:hover {
+      background: var(--line);
+      color: var(--red);
+    }
+
+    .cart-badge {
+      position: absolute;
+      top: 2px;
+      right: 2px;
+      background: var(--red);
+      color: white;
+      border-radius: 50%;
+      font: 10px 'DM Sans', sans-serif;
+      padding: 2px 6px;
+      font-weight: 700;
+    }
+
+    .cart-badge[hidden] {
+      display: none !important;
+    }
+
+    .mobile-btn {
+      display: none;
+    }
+
+    /* Mobile Offcanvas */
+    .offcanvas {
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    .offcanvas-header {
+      border-bottom: 1px solid var(--line);
+      padding: 20px;
+    }
+
+    .offcanvas-body a {
+      display: block;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--line);
+      font-weight: 600;
+    }
+
+    .mobile-accordion {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: 14px 0;
+      background: transparent;
+      border: 0;
+      border-bottom: 1px solid var(--line);
+      color: var(--text);
+      font-weight: 600;
+      text-align: left;
+    }
+
+    .mobile-accordion i {
+      transition: transform 0.2s;
+    }
+
+    .mobile-accordion[aria-expanded="true"] {
+      color: var(--rose);
+    }
+
+    .mobile-accordion[aria-expanded="true"] i {
+      transform: rotate(180deg);
+    }
+
+    .mobile-submenu {
+      padding-left: 18px;
+    }
+
+    .mobile-submenu a {
+      font-size: 13px;
+      color: var(--muted);
+      border-bottom: none;
+      padding: 10px 0;
+    }
+
+    /* Contact Hero (Aligned to 720px Height & Technology Concept) */
+    .contact-hero {
+      position: relative;
+      min-height: 720px;
+      display: flex;
+      align-items: center;
+      color: #fff;
+      overflow: hidden;
+      background: radial-gradient(circle at 75% 35%, rgba(165, 42, 58, 0.22) 0%, transparent 55%),
+                  linear-gradient(135deg, rgba(17, 18, 22, 0.96) 0%, rgba(17, 18, 22, 0.82) 50%, rgba(17, 18, 22, 0.6) 100%),
+                  url('images/Classic/Footer.jpg') center/cover;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .contact-hero::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 120px;
+      background: linear-gradient(to top, var(--bg), transparent);
+      pointer-events: none;
+    }
+
+    .contact-hero .container {
+      padding-top: 130px;
+      padding-bottom: 110px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .contact-hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 16px;
+      background: rgba(165, 42, 58, 0.15);
+      border: 1px solid rgba(212, 140, 150, 0.3);
+      border-radius: 50px;
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--rose);
+      margin-bottom: 22px;
+    }
+
+    .contact-title {
+      font-size: clamp(52px, 7.5vw, 108px);
+      line-height: 1.04;
+      max-width: 880px;
+      margin: 15px 0 25px;
+      font-weight: 500;
+      letter-spacing: -1px;
+    }
+
+    .contact-title em {
+      font-weight: 400;
+      color: var(--rose);
+      font-style: italic;
+    }
+
+    .contact-hero p {
+      max-width: 560px;
+      line-height: 1.95;
+      color: #d2ced2;
+      font-size: 1.1rem;
+      margin-bottom: 35px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      align-items: center;
+    }
+
+    /* Page Specific Layout */
+    .contact-layout {
+      padding: 80px 0 95px;
+    }
+
+    .contact-card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      padding: clamp(24px, 4vw, 44px);
+      height: 100%;
+      border-radius: 4px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.05);
+    }
+
+    .contact-card h2 {
+      font-size: clamp(26px, 3vw, 36px);
+      margin-bottom: 10px;
+    }
+
+    .contact-form label {
+      display: block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 9px;
+      color: var(--muted);
+    }
+
+    .contact-form .form-control, .contact-form .form-select {
+      min-height: 52px;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      background: var(--bg);
+      color: var(--text);
+      padding: 13px 15px;
+      font: 14px 'DM Sans', sans-serif;
+      box-shadow: none;
+      transition: var(--transition-smooth);
+    }
+
+    .contact-form textarea.form-control {
+      min-height: 155px;
+      resize: vertical;
+    }
+
+    .contact-form .form-control:focus, .contact-form .form-select:focus {
+      border-color: var(--red);
+      background: var(--card);
+    }
+
+    .contact-form .form-control::placeholder {
+      color: var(--muted);
+      opacity: 0.8;
+    }
+
+    .contact-method {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .contact-method:last-child {
+      border-bottom: 0;
+    }
+
+    .contact-icon {
+      flex: 0 0 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      color: var(--rose);
+      background: rgba(165, 42, 58, 0.12);
+      font-size: 20px;
+      border-radius: 4px;
+    }
+
+    .contact-method h3 {
+      font: 700 13px 'DM Sans', sans-serif;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin: 2px 0 7px;
+    }
+
+    .contact-method p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.8;
+      overflow-wrap: anywhere;
+    }
+
+    .contact-method a {
+      color: var(--text);
+    }
+
+    .contact-method a:hover {
+      color: var(--rose);
+    }
+
+    .contact-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .contact-actions .btn-red, .contact-actions .btn-line {
+      justify-content: center;
+      border-radius: 4px;
+    }
+
+    .form-note {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .form-status {
+      display: none;
+      margin-top: 18px;
+      padding: 14px 16px;
+      border-left: 3px solid var(--red);
+      background: var(--bg);
+      color: var(--text);
+      font-size: 13px;
+      line-height: 1.7;
+      border-radius: 0 4px 4px 0;
+    }
+
+    .form-status.show {
+      display: block;
+    }
+
+    .contact-bottom {
+      padding: 0 0 85px;
+    }
+
+    .contact-promise {
+      border: 1px solid var(--line);
+      padding: 25px;
+      display: flex;
+      align-items: center;
+      gap: 17px;
+      height: 100%;
+      background: var(--card);
+      border-radius: 4px;
+    }
+
+    .contact-promise i {
+      font-size: 25px;
+      color: var(--red);
+    }
+
+    .contact-promise strong {
+      display: block;
+      font-size: 13px;
+      margin-bottom: 5px;
+    }
+
+    .contact-promise span {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    /* Scroll Progress & Back to Top */
+    .scroll-progress {
+      position: fixed;
+      z-index: 1200;
+      top: 0;
+      left: 0;
+      height: 2px;
+      width: 0;
+      background: linear-gradient(90deg, var(--red), var(--rose));
+      box-shadow: 0 0 12px rgba(212,140,150,.65);
+      pointer-events: none;
+    }
+    .back-to-top {
+      position: fixed;
+      z-index: 1040;
+      right: 24px;
+      bottom: 24px;
+      width: 46px;
+      height: 46px;
+      border: 1px solid var(--rose);
+      border-radius: 50%;
+      color: white;
+      background: var(--red);
+      display: grid;
+      place-items: center;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(14px);
+      transition: all .4s cubic-bezier(.2,.75,.25,1);
+      box-shadow: 0 10px 28px rgba(0,0,0,.2);
+    }
+    .back-to-top.is-visible { opacity: 1; visibility: visible; transform: translateY(0); }
+    .back-to-top:hover { transform: translateY(-5px); background: var(--red-hover); }
+
+    /* Footer */
+    footer {
+      background: #15161A;
+      color: #F3F3F5;
+      padding: 75px 0 0;
+      border-top: 1px solid var(--line);
+    }
+
+    footer h4 {
+      font: 700 12px 'DM Sans', sans-serif;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 22px;
+      color: var(--rose);
+    }
+
+    footer p, footer a {
+      font-size: 13px;
+      color: #a7a8ae;
+      line-height: 1.9;
+    }
+
+    footer a:hover {
+      color: var(--rose);
+    }
+
+    footer ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    footer li {
+      margin-bottom: 10px;
+    }
+
+    .social a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid #454A53;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      margin-right: 7px;
+      color: white;
+      transition: var(--transition-smooth);
+    }
+
+    .social a:hover {
+      background: var(--red);
+      border-color: var(--red);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      margin-top: 55px;
+      padding: 22px 0;
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    /* Ticker Bar */
+    .ticker {
+      background: var(--red);
+      color: white;
+      padding: 10px 16px;
+      text-align: center;
+      font-size: 11px;
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+      letter-spacing: 0.5px;
+    }
+
+    .ticker button {
+      background: transparent;
+      color: white;
+      border: 0;
+      text-decoration: underline;
+      font-size: 11px;
+    }
+
+    /* Responsive Queries */
+    @media(max-width: 1199px) {
+      .nav-main { gap: 12px; }
+      .nav-drop-toggle { font-size: 10px; }
+    }
+
+    @media(max-width: 991px) {
+      .nav-main { display: none; }
+      .mobile-btn { display: flex; }
+      .contact-layout { padding: 60px 0 70px; }
+    }
+
+    @media(max-width: 767px) {
+      .contact-hero { min-height: 590px; }
+      .contact-card { padding: 23px 18px; }
+      .contact-actions { flex-direction: column; }
+      .contact-actions a, .contact-actions button { width: 100%; }
+      .back-to-top { right: 15px; bottom: 15px; }
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container-fluid px-3 px-xl-5 nav-wrap">
+      <a href="index.html" class="brand" aria-label="Alberto Watch home">
+        ALBERTO<span>.</span>
+        <small>WATCH COMPANY</small>
+      </a>
+
+      <nav class="nav-main" aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <div class="nav-drop">
+          <button type="button" class="nav-drop-toggle" aria-expanded="false" aria-controls="collectionsDropdown">
+            All Collections <i class="bi bi-chevron-down"></i>
+          </button>
+          <div class="drop-panel" id="collectionsDropdown">
+            <a href="collections.html">All Collections</a>
+            <a href="luxury.html">Luxury</a>
+            <a href="vintage.html">Vintage</a>
+            <a href="smart.html">Smart Watches</a>
+            <a href="classic.html">Classic</a>
+            <a href="clocks.html">Clocks</a>
+          </div>
+        </div>
+        <a href="technology.html">Technology</a>
+        <a href="craftsmanship.html">Craftsmanship</a>
+        <a href="ourstory.html">Our Story</a>
+        <a href="storelocator.html">Store Locator</a>
+        <div class="nav-drop">
+          <button type="button" class="nav-drop-toggle" aria-expanded="false" aria-controls="supportDropdown">
+            Support <i class="bi bi-chevron-down"></i>
+          </button>
+          <div class="drop-panel" id="supportDropdown">
+            <a href="support.html">Help & Support</a>
+            <a class="active" href="contact.html" aria-current="page">Contact Us</a>
+            <a href="repair.html">Watch Repair</a>
+            <a href="support.html#faq">FAQs</a>
+          </div>
+        </div>
+      </nav>
+
+      <div class="nav-tools">
+        <button class="icon-btn" id="searchBtn" aria-label="Search"><i class="bi bi-search"></i></button>
+        <button class="icon-btn" id="themeBtn" aria-label="Switch theme"><i class="bi bi-sun"></i></button>
+        <a class="icon-btn" href="cart.html" aria-label="Cart">
+          <i class="bi bi-bag"></i>
+          <span class="cart-badge" id="cartCount" hidden>0</span>
+        </a>
+        <button class="icon-btn mobile-btn" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu" aria-label="Open menu">
+          <i class="bi bi-list"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Menu Offcanvas -->
+  <div class="offcanvas offcanvas-end" id="mobileMenu" tabindex="-1" aria-label="Mobile navigation">
+    <div class="offcanvas-header">
+      <strong class="brand">ALBERTO<span>.</span></strong>
+      <button class="icon-btn" data-bs-dismiss="offcanvas" aria-label="Close menu"><i class="bi bi-x-lg"></i></button>
+    </div>
+    <div class="offcanvas-body">
+      <a href="index.html">Home</a>
+
+      <button type="button" class="mobile-accordion" data-bs-toggle="collapse" data-bs-target="#mobileCollections" aria-expanded="false" aria-controls="mobileCollections">
+        All Collections <i class="bi bi-chevron-down"></i>
+      </button>
+      <div class="collapse mobile-submenu" id="mobileCollections">
+        <a href="collections.html">View All Collections</a>
+        <a href="luxury.html">Luxury</a>
+        <a href="vintage.html">Vintage</a>
+        <a href="smart.html">Smart Watches</a>
+        <a href="classic.html">Classic</a>
+        <a href="clocks.html">Clocks</a>
+      </div>
+
+      <a href="technology.html">Technology</a>
+      <a href="craftsmanship.html">Craftsmanship</a>
+      <a href="ourstory.html">Our Story</a>
+      <a href="storelocator.html">Store Locator</a>
+
+      <button type="button" class="mobile-accordion" data-bs-toggle="collapse" data-bs-target="#mobileSupport" aria-expanded="false" aria-controls="mobileSupport">
+        Support <i class="bi bi-chevron-down"></i>
+      </button>
+      <div class="collapse mobile-submenu" id="mobileSupport">
+        <a href="support.html">Help &amp; Support</a>
+        <a class="active" href="contact.html" aria-current="page">Contact Us</a>
+        <a href="repair.html">Watch Repair</a>
+        <a href="support.html#faq">FAQs</a>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <!-- Contact Hero Section (Technology Concept & 720px Height Aligned) -->
+    <section class="contact-hero">
+      <div class="container">
+        <div class="contact-hero-badge"><i class="bi bi-headset me-2"></i> Client Advisory Services</div>
+        <h1 class="contact-title">Let's Start a<br><em>Conversation.</em></h1>
+        <p>Questions about a timepiece, an order, or our services? Send us a message and choose the way that works best for you.</p>
+        <div class="hero-actions">
+          <a class="btn-red" href="#contactFormCard">Send Message <i class="bi bi-arrow-down"></i></a>
+          <a class="btn-line" href="support.html">Explore FAQ <i class="bi bi-question-circle"></i></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact-layout">
+      <div class="container">
+        <div class="row g-4 g-xl-5 align-items-stretch">
+          <div class="col-lg-7" id="contactFormCard">
+            <div class="contact-card">
+              <span class="eyebrow">Contact Form</span>
+              <h2>Tell Us How We Can Help.</h2>
+              <p class="muted mb-4">Complete the details below, then send your message by email or WhatsApp.</p>
+              <form class="contact-form" id="contactForm">
+                <div class="row g-3">
+                  <div class="col-md-6">
+                    <label for="fullName">Full Name *</label>
+                    <input class="form-control" id="fullName" name="name" autocomplete="name" placeholder="Your full name" required maxlength="100">
+                  </div>
+                  <div class="col-md-6">
+                    <label for="email">Email Address *</label>
+                    <input class="form-control" id="email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required maxlength="150">
+                  </div>
+                  <div class="col-md-6">
+                    <label for="phone">Phone Number</label>
+                    <input class="form-control" id="phone" name="phone" type="tel" autocomplete="tel" placeholder="Your contact number" maxlength="30">
+                  </div>
+                  <div class="col-md-6">
+                    <label for="topic">What can we help with? *</label>
+                    <select class="form-select" id="topic" name="topic" required>
+                      <option value="" selected disabled>Select a topic</option>
+                      <option>Product enquiry</option>
+                      <option>Order or delivery</option>
+                      <option>Watch repair / service</option>
+                      <option>Warranty information</option>
+                      <option>Store / availability</option>
+                      <option>Feedback</option>
+                      <option>Other</option>
+                    </select>
+                  </div>
+                  <div class="col-12">
+                    <label for="reference">Order / Reference Number (optional)</label>
+                    <input class="form-control" id="reference" name="reference" placeholder="If applicable" maxlength="80">
+                  </div>
+                  <div class="col-12">
+                    <label for="subject">Subject *</label>
+                    <input class="form-control" id="subject" name="subject" placeholder="A short title for your message" required maxlength="150">
+                  </div>
+                  <div class="col-12">
+                    <label for="message">Your Message *</label>
+                    <textarea class="form-control" id="message" name="message" placeholder="Write your message here..." required minlength="10" maxlength="4000"></textarea>
+                  </div>
+                  <div class="col-12">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" id="consent" required>
+                      <label class="form-check-label" for="consent" style="display:inline;text-transform:none;letter-spacing:0;font-size:12px;font-weight:400">
+                        I agree to share these details with Alberto Watch so the team can respond to my enquiry. *
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-12 contact-actions">
+                    <button class="btn-red" type="submit" id="emailSubmit">Send by Email <i class="bi bi-envelope-arrow-up"></i></button>
+                    <button class="btn-line" type="button" id="whatsappSubmit">Send by WhatsApp <i class="bi bi-whatsapp"></i></button>
+                  </div>
+                  <div class="col-12">
+                    <p class="form-note mb-0">Your message is prepared with the details you enter. Email opens your email app; WhatsApp opens a chat with our support number so you can review and send the message.</p>
+                    <div class="form-status" id="formStatus" role="status" aria-live="polite"></div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <div class="col-lg-5">
+            <div class="contact-card">
+              <span class="eyebrow">Get In Touch</span>
+              <h2>Reach Our Team.</h2>
+              <p class="muted">Choose your preferred contact method. We look forward to helping you.</p>
+              <div class="contact-method">
+                <div class="contact-icon"><i class="bi bi-envelope"></i></div>
+                <div>
+                  <h3>Email Us</h3>
+                  <p><a href="mailto:hamxa.xp.11@gmail.com">hamxa.xp.11@gmail.com</a></p>
+                  <p>For enquiries and support requests</p>
+                </div>
+              </div>
+              <div class="contact-method">
+                <div class="contact-icon"><i class="bi bi-whatsapp"></i></div>
+                <div>
+                  <h3>WhatsApp</h3>
+                  <p><a href="https://wa.me/923102226984" target="_blank" rel="noopener noreferrer">0310 2226984</a></p>
+                  <p>Chat with us directly on WhatsApp</p>
+                </div>
+              </div>
+              <div class="contact-method">
+                <div class="contact-icon"><i class="bi bi-clock"></i></div>
+                <div>
+                  <h3>Before You Send</h3>
+                  <p>For order-related questions, include your order or reference number where available so we can understand your request.</p>
+                </div>
+              </div>
+              <div class="contact-actions">
+                <a class="btn-red" href="mailto:hamxa.xp.11@gmail.com?subject=Alberto%20Watch%20Enquiry">Email Directly <i class="bi bi-arrow-up-right"></i></a>
+                <a class="btn-line" href="https://wa.me/923102226984" target="_blank" rel="noopener noreferrer">Open WhatsApp <i class="bi bi-arrow-up-right"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact-bottom">
+      <div class="container">
+        <div class="row g-3">
+          <div class="col-md-4">
+            <div class="contact-promise">
+              <i class="bi bi-shield-check"></i>
+              <div>
+                <strong>Your Details, Handled Carefully</strong>
+                <span>Only include information relevant to your enquiry.</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="contact-promise">
+              <i class="bi bi-chat-square-text"></i>
+              <div>
+                <strong>Clear Communication</strong>
+                <span>Send a complete message with the details our team needs.</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="contact-promise">
+              <i class="bi bi-watch"></i>
+              <div>
+                <strong>Timepiece Support</strong>
+                <span>We're ready to help with products, service and general questions.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="row g-5">
+        <div class="col-lg-4 col-md-6">
+          <a class="brand" href="index.html" style="color:white">ALBERTO<span>.</span></a>
+          <p class="mt-4">Discover exceptional timepieces. Luxury, craftsmanship and innovation come together in the Alberto Watch experience.</p>
+          <div class="social mt-4">
+            <a href="https://www.instagram.com/" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+            <a href="https://www.facebook.com/" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+            <a href="https://www.pinterest.com/" aria-label="Pinterest"><i class="bi bi-pinterest"></i></a>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-6 col-6">
+          <h4>Explore</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="collections.html">Collections</a></li>
+            <li><a href="technology.html">Technology</a></li>
+            <li><a href="craftsmanship.html">Craftsmanship</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="pricelist.html">Price List</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-md-6 col-6">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="ourstory.html">Our Story</a></li>
+            <li><a href="storelocator.html">Store Locator</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="sitemap.html">Site Map</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <h4>Customer Care</h4>
+          <ul>
+            <li><a href="support.html">Help & Support</a></li>
+            <li><a href="repair.html">Watch Repair</a></li>
+            <li><a href="support.html#faq">Frequently Asked Questions</a></li>
+            <li><a href="contact.html">Contact Our Team</a></li>
+          </ul>
+          <p class="mt-3">Your journey with Alberto continues beyond the purchase of a timepiece.</p>
+        </div>
+      </div>
+      <div class="footer-bottom d-flex flex-wrap justify-content-between gap-2">
+        <span>&copy; <span id="year"></span> Alberto Watch Company. All rights reserved.</span>
+        <span><a href="privacy.html">Privacy Policy</a> &nbsp; | &nbsp; <a href="terms.html">Terms & Conditions</a></span>
+      </div>
+    </div>
+  </footer>
+
+  <button class="back-to-top" id="backToTop" aria-label="Back to top"><i class="bi bi-arrow-up"></i></button>
+
+  <!-- Ticker Bar -->
+  <div class="ticker">
+    <span><i class="bi bi-calendar3"></i> <span id="date"></span></span>
+    <span><i class="bi bi-clock"></i> <span id="time"></span></span>
+    <span><i class="bi bi-geo-alt"></i> <span id="location">Location not requested</span></span>
+    <button id="locationBtn">Enable Location</button>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    
+    $(function(){
+      const root = document.documentElement;
+
+      function applyTheme(t) {
+        root.dataset.theme = t;
+        localStorage.setItem('albertoTheme', t);
+        $('#themeBtn')
+          .html(t === 'dark' ? '<i class="bi bi-sun"></i>' : '<i class="bi bi-moon-stars"></i>')
+          .attr('aria-label', t === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+      }
+
+      applyTheme(localStorage.getItem('albertoTheme') === 'light' ? 'light' : 'dark');
+      $('#themeBtn').on('click', () => applyTheme(root.dataset.theme === 'dark' ? 'light' : 'dark'));
+
+      function updateCartCount() {
+        try {
+          const cart = JSON.parse(localStorage.getItem('albertoCart') || '[]');
+          const count = Array.isArray(cart) ? cart.reduce((n, p) => n + (Number(p.quantity) || 0), 0) : 0;
+          $('#cartCount').text(count).prop('hidden', count === 0);
+        } catch(e) {
+          $('#cartCount').prop('hidden', true);
+        }
+      }
+      updateCartCount();
+      $(window).on('storage focus', updateCartCount);
+
+      // Dropdowns
+      $('.nav-drop-toggle').on('click', function(e) {
+        e.stopPropagation();
+        const parent = $(this).closest('.nav-drop'), wasOpen = parent.hasClass('is-open');
+        $('.nav-drop').removeClass('is-open').find('.nav-drop-toggle').attr('aria-expanded', 'false');
+        if (!wasOpen) {
+          parent.addClass('is-open');
+          $(this).attr('aria-expanded', 'true');
+        }
+      });
+
+      $(document).on('click keydown', function(e) {
+        if (e.type === 'keydown' && e.key !== 'Escape') return;
+        if (!$(e.target).closest('.nav-drop').length) {
+          $('.nav-drop').removeClass('is-open').find('.nav-drop-toggle').attr('aria-expanded', 'false');
+        }
+      });
+
+      $('#searchBtn').on('click', function() {
+        const q = prompt('Search watch collections:');
+        if (q && q.trim()) location.href = 'collections.html?search=' + encodeURIComponent(q.trim());
+      });
+
+      function clock() {
+        const d = new Date();
+        $('#date').text(d.toLocaleDateString('en-GB', {weekday: 'short', day: '2-digit', month: 'short', year: 'numeric'}));
+        $('#time').text(d.toLocaleTimeString('en-GB'));
+      }
+      clock();
+      setInterval(clock, 1000);
+      $('#year').text(new Date().getFullYear());
+
+      $('#locationBtn').on('click', function() {
+        if (!navigator.geolocation) { $('#location').text('Not supported'); return; }
+        $('#location').text('Detecting...');
+        navigator.geolocation.getCurrentPosition(
+          p => $('#location').text(p.coords.latitude.toFixed(2) + ', ' + p.coords.longitude.toFixed(2)),
+          () => $('#location').text('Permission unavailable'),
+          {timeout: 10000, maximumAge: 300000}
+        );
+      });
+
+      /* ===== GSAP CINEMATIC SCROLL ANIMATIONS ===== */
+      const motionReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      if (window.gsap && window.ScrollTrigger && !motionReduced) {
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Hero Intro Animation
+        const tl = gsap.timeline({ defaults: { ease: 'power4.out' } });
+        tl.fromTo('.contact-hero-badge', { y: 25, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8 }, .1)
+          .fromTo('.contact-title', { y: 55, opacity: 0, rotateX: -10 }, { y: 0, opacity: 1, rotateX: 0, duration: 1.1 }, .3)
+          .fromTo('.contact-hero p', { y: 25, opacity: 0 }, { y: 0, opacity: 1, duration: .8 }, .5)
+          .fromTo('.hero-actions', { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: .7 }, .7);
+
+        // Scroll reveals for sections & cards
+        const cinematicTargets = document.querySelectorAll(
+          '.contact-layout .contact-card, .contact-method, .contact-promise, footer .row > div'
+        );
+        cinematicTargets.forEach((el, i) => {
+          gsap.set(el, { autoAlpha: 0, y: 35 });
+          ScrollTrigger.create({
+            trigger: el,
+            start: 'top 88%',
+            once: true,
+            onEnter: () => gsap.to(el, {
+              autoAlpha: 1, y: 0, duration: 1.05,
+              delay: (i % 3) * 0.08, ease: 'power3.out',
+              overwrite: true
+            })
+          });
+        });
+      }
+
+      /* ===== SCROLL PROGRESS & BACK TO TOP ===== */
+      const progress = document.getElementById('scrollProgress');
+      const backTop = document.getElementById('backToTop');
+      let scrollTicking = false;
+
+      function updateScrollEffects() {
+        const max = document.documentElement.scrollHeight - window.innerHeight;
+        const amount = max > 0 ? (window.scrollY / max) * 100 : 0;
+        if (progress) progress.style.width = amount + '%';
+        document.querySelector('.site-header')?.classList.toggle('is-scrolled', window.scrollY > 24);
+        backTop?.classList.toggle('is-visible', window.scrollY > 500);
+        scrollTicking = false;
+      }
+
+      window.addEventListener('scroll', () => {
+        if (!scrollTicking) {
+          requestAnimationFrame(updateScrollEffects);
+          scrollTicking = true;
+        }
+      }, { passive: true });
+      updateScrollEffects();
+
+      backTop?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: motionReduced ? 'auto' : 'smooth' }));
+
+      // Contact Form Handlers
+      function collectMessage() {
+        const form = document.getElementById('contactForm');
+        if (!form.reportValidity()) return null;
+        const d = new FormData(form);
+        return `ALBERTO WATCH — CONTACT ENQUIRY\n\nName: ${d.get('name')}\nEmail: ${d.get('email')}\nPhone: ${d.get('phone')||'Not provided'}\nTopic: ${d.get('topic')}\nOrder / Reference: ${d.get('reference')||'Not provided'}\nSubject: ${d.get('subject')}\n\nMessage:\n${d.get('message')}`;
+      }
+
+      function status(msg) {
+        $('#formStatus').text(msg).addClass('show');
+      }
+
+      $('#contactForm').on('submit', function(e) {
+        e.preventDefault();
+        const msg = collectMessage();
+        if (!msg) return;
+        const subject = $('#subject').val().trim() || 'Alberto Watch Enquiry';
+        window.location.href = 'mailto:hamxa.xp.11@gmail.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(msg);
+        status('Your email draft is ready. Please review it in your email app and press Send to deliver it.');
+      });
+
+      $('#whatsappSubmit').on('click', function() {
+        const msg = collectMessage();
+        if (!msg) return;
+        status('WhatsApp is opening with your message. Review it in WhatsApp and press Send to deliver it.');
+        window.open('https://wa.me/923102226984?text=' + encodeURIComponent(msg), '_blank', 'noopener,noreferrer');
+      });
+    });
+  </script>
+  
+</body>
+
+</html>

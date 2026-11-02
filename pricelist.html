@@ -1,0 +1,1570 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Price List | Alberto Watch Company</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+    rel="stylesheet" />
+    <style>
+      
+    /* Theme Variables */
+    :root {
+      --red: #A52A3A;
+      --red-hover: #84212f;
+      --rose: #D48C96;
+      --steel: #454A53;
+      --pearl: #F3F3F5;
+      --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    [data-theme=dark] {
+      --bg: #1B1D22;
+      --card: #292C32;
+      --text: #F3F3F5;
+      --muted: #B7B8BF;
+      --line: #454A53;
+      --nav: rgba(27, 29, 34, 0.9);
+      --glass: rgba(255, 255, 255, 0.03);
+    }
+
+    [data-theme=light] {
+      --bg: #F3F3F5;
+      --card: #fff;
+      --text: #1B1D22;
+      --muted: #626671;
+      --line: #D7D7DC;
+      --nav: rgba(243, 243, 245, 0.9);
+      --glass: rgba(0, 0, 0, 0.02);
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      transition: background .3s, color .3s;
+      overflow-x: hidden;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    .brand {
+      font-family: 'Playfair Display', serif;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+      transition: var(--transition-smooth);
+    }
+
+    a:hover {
+      color: var(--rose);
+    }
+
+    button {
+      cursor: pointer;
+      border: none;
+      background: none;
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--rose);
+      outline-offset: 3px;
+    }
+
+    .section {
+      padding: 95px 0;
+    }
+
+    .eyebrow {
+      font-size: 11px;
+      color: var(--rose);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .heading {
+      font-size: clamp(35px, 4vw, 60px);
+      margin: 12px 0 20px;
+    }
+
+    .muted {
+      color: var(--muted);
+      line-height: 1.85;
+    }
+
+    .btn-red,
+    .btn-line {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 24px;
+      font-size: 12px;
+      letter-spacing: 1.3px;
+      text-transform: uppercase;
+      font-weight: 700;
+      transition: var(--transition-smooth);
+      border: 1px solid var(--red);
+      border-radius: 4px;
+    }
+
+    .btn-red {
+      background: var(--red);
+      color: white;
+    }
+
+    .btn-red:hover {
+      background: var(--red-hover);
+      color: white;
+      transform: translateY(-3px);
+    }
+
+    .btn-line {
+      background: transparent;
+      color: inherit;
+      border-color: currentColor;
+    }
+
+    .btn-line:hover {
+      background: var(--red);
+      border-color: var(--red);
+      color: white;
+    }
+
+    /* Standardized Navigation Bar */
+    .site-header {
+      position: fixed;
+      z-index: 1050;
+      top: 0;
+      width: 100%;
+      background: var(--nav);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      transition: var(--transition-smooth);
+    }
+
+    .nav-wrap {
+      min-height: 85px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      font-size: 26px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      line-height: 1;
+    }
+
+    .brand span {
+      color: var(--red);
+    }
+
+    .brand small {
+      display: block;
+      font: 8px 'DM Sans', sans-serif;
+      letter-spacing: 4px;
+      text-align: center;
+      margin-top: 6px;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    .nav-main {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+    }
+
+    .nav-main > a,
+    .nav-drop-toggle {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 30px 0;
+      display: block;
+      color: var(--text);
+      background: transparent;
+      border: 0;
+    }
+
+    .nav-main .active,
+    .nav-main > a:hover,
+    .nav-drop-toggle:hover,
+    .nav-drop-toggle[aria-expanded="true"] {
+      color: var(--red);
+    }
+
+    .nav-drop {
+      position: relative;
+    }
+
+    .drop-panel {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      min-width: 200px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      padding: 10px;
+      display: none;
+      box-shadow: 0 20px 35px rgba(0, 0, 0, 0.15);
+      z-index: 1100;
+      border-radius: 4px;
+    }
+
+    .nav-drop:hover .drop-panel,
+    .nav-drop.is-open .drop-panel {
+      display: block;
+    }
+
+    .drop-panel a {
+      display: block;
+      padding: 10px 14px;
+      font-size: 12px;
+      border-radius: 2px;
+    }
+
+    .drop-panel a:hover {
+      background: var(--bg);
+      color: var(--red);
+    }
+
+    .nav-drop-toggle i {
+      font-size: 10px;
+      margin-left: 4px;
+      display: inline-block;
+      transition: transform 0.2s;
+    }
+
+    .nav-drop-toggle[aria-expanded="true"] i {
+      transform: rotate(180deg);
+    }
+
+    .nav-tools {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .icon-btn {
+      border: 0;
+      background: var(--glass);
+      color: var(--text);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      font-size: 18px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition-smooth);
+    }
+
+    .icon-btn:hover {
+      background: var(--line);
+      color: var(--red);
+    }
+
+    .cart-badge {
+      position: absolute;
+      top: 2px;
+      right: 2px;
+      background: var(--red);
+      color: white;
+      border-radius: 50%;
+      font: 10px 'DM Sans', sans-serif;
+      padding: 2px 6px;
+      font-weight: 700;
+    }
+
+    .cart-badge[hidden] {
+      display: none !important;
+    }
+
+    .mobile-btn {
+      display: none;
+    }
+
+    /* Standardized Mobile Offcanvas */
+    .offcanvas {
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    .offcanvas-header {
+      border-bottom: 1px solid var(--line);
+      padding: 20px;
+    }
+
+    .offcanvas-body a {
+      display: block;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--line);
+      font-weight: 600;
+    }
+
+    .mobile-accordion {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: 14px 0;
+      background: transparent;
+      border: 0;
+      border-bottom: 1px solid var(--line);
+      color: var(--text);
+      font-weight: 600;
+      text-align: left;
+    }
+
+    .mobile-accordion i {
+      transition: transform 0.2s;
+    }
+
+    .mobile-accordion[aria-expanded="true"] {
+      color: var(--rose);
+    }
+
+    .mobile-accordion[aria-expanded="true"] i {
+      transform: rotate(180deg);
+    }
+
+    .mobile-submenu {
+      padding-left: 18px;
+    }
+
+    .mobile-submenu a {
+      font-size: 13px;
+      color: var(--muted);
+      border-bottom: none;
+      padding: 10px 0;
+    }
+
+    /* Original Price List Hero Section */
+    .price-hero {
+      position: relative;
+      min-height: 570px;
+      display: flex;
+      align-items: center;
+      color: white;
+      background: linear-gradient(90deg, #111216f0, #111216a0 55%, #11121644),
+        url('https://images.unsplash.com/photo-1523170335258-f5ed11844a49?auto=format&fit=crop&w=2000&q=90') center/cover;
+    }
+
+    .price-hero .container {
+      padding-top: 140px;
+      padding-bottom: 90px;
+    }
+
+    .price-hero h1 {
+      font-size: clamp(58px, 8vw, 110px);
+      line-height: 1.05;
+      margin: 20px 0;
+    }
+
+    .price-hero em {
+      color: var(--rose);
+      font-weight: 400;
+    }
+
+    .price-hero p {
+      max-width: 570px;
+      color: #e8e4e6;
+      line-height: 1.9;
+    }
+
+    /* Category Navigation Tabs */
+    .category-nav {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin: 25px 0;
+    }
+
+    .category-nav button {
+      border: 1px solid var(--line);
+      background: var(--card);
+      color: var(--text);
+      padding: 11px 17px;
+      font-size: 12px;
+      border-radius: 4px;
+      font-weight: 600;
+      transition: var(--transition-smooth);
+    }
+
+    .category-nav button.active,
+    .category-nav button:hover {
+      background: var(--red);
+      border-color: var(--red);
+      color: white;
+    }
+
+    /* Price List Toolbar */
+    .price-toolbar {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      background: var(--card);
+      border: 1px solid var(--line);
+      padding: 17px;
+      border-radius: 4px;
+    }
+
+    .price-toolbar input,
+    .price-toolbar select {
+      background: var(--bg);
+      border: 1px solid var(--line);
+      color: var(--text);
+      min-height: 46px;
+      padding: 10px 14px;
+      font-size: 13px;
+      border-radius: 4px;
+    }
+
+    .price-toolbar input {
+      flex: 1;
+      min-width: 220px;
+    }
+
+    .price-toolbar select {
+      min-width: 190px;
+    }
+
+    /* Original Pricing Table Layout */
+    .price-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--card);
+      min-width: 720px;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .price-table th {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--rose);
+      padding: 19px;
+      border-bottom: 1px solid var(--line);
+      background: var(--card);
+    }
+
+    .price-table td {
+      padding: 16px 19px;
+      border-bottom: 1px solid var(--line);
+      font-size: 13px;
+      vertical-align: middle;
+    }
+
+    .price-table tr:hover td {
+      background: var(--bg);
+    }
+
+    .item-info {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+    }
+
+    .item-info img {
+      width: 70px;
+      height: 70px;
+      object-fit: cover;
+      border-radius: 3px;
+    }
+
+    .item-info strong {
+      display: block;
+      font-size: 15px;
+      color: var(--text);
+    }
+
+    .item-info small {
+      color: var(--muted);
+    }
+
+    .amount {
+      font-weight: 700;
+      color: var(--rose);
+      white-space: nowrap;
+    }
+
+    .view-link {
+      color: var(--red);
+      font-weight: 700;
+      white-space: nowrap;
+      transition: color 0.2s;
+    }
+
+    .view-link:hover {
+      color: var(--rose);
+    }
+
+    .note-panel {
+      padding: 26px;
+      background: var(--card);
+      border-left: 3px solid var(--red);
+      color: var(--muted);
+      font-size: 13px;
+      border-radius: 0 4px 4px 0;
+    }
+
+    .price-cta {
+      padding: 90px 15px;
+      text-align: center;
+      color: #fff;
+      background: linear-gradient(#15161ae5, #15161ae5),
+        url('https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=1600&q=85') center/cover;
+    }
+
+    .price-cta h2 {
+      font-size: clamp(35px, 5vw, 62px);
+    }
+
+    /* Footer */
+    footer {
+      background: #15161A;
+      color: #F3F3F5;
+      padding: 75px 0 0;
+      border-top: 1px solid var(--line);
+    }
+
+    footer h4 {
+      font: 700 12px 'DM Sans', sans-serif;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 22px;
+      color: var(--rose);
+    }
+
+    footer p,
+    footer a {
+      font-size: 13px;
+      color: #a7a8ae;
+      line-height: 1.9;
+    }
+
+    footer a:hover {
+      color: var(--rose);
+    }
+
+    footer ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    footer li {
+      margin-bottom: 10px;
+    }
+
+    .social a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid #454A53;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      margin-right: 7px;
+      color: white;
+      transition: var(--transition-smooth);
+    }
+
+    .social a:hover {
+      background: var(--red);
+      border-color: var(--red);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      margin-top: 55px;
+      padding: 22px 0;
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    .ticker {
+      background: var(--red);
+      color: white;
+      padding: 10px 16px;
+      text-align: center;
+      font-size: 11px;
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+      letter-spacing: 0.5px;
+    }
+
+    .ticker button {
+      background: transparent;
+      color: white;
+      border: 0;
+      text-decoration: underline;
+      font-size: 11px;
+    }
+
+    #scrollProgress {
+      position: fixed;
+      z-index: 1100;
+      top: 0;
+      left: 0;
+      height: 3px;
+      width: 0;
+      background: var(--red);
+      pointer-events: none;
+    }
+
+    #backToTop {
+      position: fixed;
+      z-index: 1040;
+      right: 22px;
+      bottom: 25px;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      border: 1px solid var(--rose);
+      background: var(--red);
+      color: #fff;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(15px);
+      transition: .3s;
+    }
+
+    #backToTop.visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    @media(max-width:1199px) {
+      .nav-main {
+        gap: 12px;
+      }
+
+      .nav-main>a,
+      .nav-drop-toggle {
+        font-size: 10px;
+      }
+    }
+
+    @media(max-width:991px) {
+      .nav-main {
+        display: none;
+      }
+
+      .mobile-btn {
+        display: flex;
+      }
+    }
+
+    @media(max-width:767px) {
+      .section {
+        padding: 60px 0;
+      }
+
+      .price-hero {
+        min-height: 520px;
+      }
+
+      .price-toolbar>* {
+        width: 100%;
+      }
+
+      .price-hero .container {
+        padding-top: 130px;
+      }
+    }
+    </style>
+</head>
+
+<body>
+  <!-- Standard Header -->
+  <header class="site-header">
+    <div class="container-fluid px-3 px-xl-5 nav-wrap">
+      <a aria-label="Alberto Watch home" class="brand" href="index.html">
+        ALBERTO<span>.</span>
+        <small>WATCH COMPANY</small>
+      </a>
+
+      <nav aria-label="Main navigation" class="nav-main">
+        <a href="index.html">Home</a>
+        <div class="nav-drop">
+          <button aria-controls="collectionsDropdown" aria-expanded="false" class="nav-drop-toggle" type="button">
+            All Collections <i class="bi bi-chevron-down"></i>
+          </button>
+          <div class="drop-panel" id="collectionsDropdown">
+            <a href="collections.html">All Collections</a>
+            <a href="luxury.html">Luxury</a>
+            <a href="vintage.html">Vintage</a>
+            <a href="smart.html">Smart Watches</a>
+            <a href="classic.html">Classic</a>
+            <a href="clocks.html">Clocks</a>
+          </div>
+        </div>
+        <a href="technology.html">Technology</a>
+        <a href="craftsmanship.html">Craftsmanship</a>
+        <a href="ourstory.html">Our Story</a>
+        <a href="storelocator.html">Store Locator</a>
+        <div class="nav-drop">
+          <button aria-controls="supportDropdown" aria-expanded="false" class="nav-drop-toggle" type="button">
+            Support <i class="bi bi-chevron-down"></i>
+          </button>
+          <div class="drop-panel" id="supportDropdown">
+            <a href="support.html">Help &amp; Support</a>
+            <a href="contact.html">Contact Us</a>
+            <a href="repair.html">Watch Repair</a>
+            <a href="support.html#faq">FAQs</a>
+          </div>
+        </div>
+      </nav>
+
+      <div class="nav-tools">
+        <button aria-label="Search" class="icon-btn" id="searchBtn">
+          <i class="bi bi-search"></i>
+        </button>
+        <button aria-label="Switch theme" class="icon-btn" id="themeBtn">
+          <i class="bi bi-sun"></i>
+        </button>
+        <a aria-label="Cart" class="icon-btn" href="cart.html">
+          <i class="bi bi-bag"></i>
+          <span class="cart-badge" hidden id="cartCount">0</span>
+        </a>
+        <button aria-label="Open menu" class="icon-btn mobile-btn" data-bs-target="#mobileMenu" data-bs-toggle="offcanvas">
+          <i class="bi bi-list"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Offcanvas Menu -->
+  <div aria-label="Mobile navigation" class="offcanvas offcanvas-end" id="mobileMenu" tabindex="-1">
+    <div class="offcanvas-header">
+      <strong class="brand">ALBERTO<span>.</span></strong>
+      <button aria-label="Close menu" class="icon-btn" data-bs-dismiss="offcanvas">
+        <i class="bi bi-x-lg"></i>
+      </button>
+    </div>
+    <div class="offcanvas-body">
+      <a href="index.html">Home</a>
+      <button aria-controls="mobileCollections" aria-expanded="false" class="mobile-accordion" data-bs-target="#mobileCollections" data-bs-toggle="collapse" type="button">
+        All Collections <i class="bi bi-chevron-down"></i>
+      </button>
+      <div class="collapse mobile-submenu" id="mobileCollections">
+        <a href="collections.html">View All Collections</a>
+        <a href="luxury.html">Luxury</a>
+        <a href="vintage.html">Vintage</a>
+        <a href="smart.html">Smart Watches</a>
+        <a href="classic.html">Classic</a>
+        <a href="clocks.html">Clocks</a>
+      </div>
+
+      <a href="technology.html">Technology</a>
+      <a href="craftsmanship.html">Craftsmanship</a>
+      <a href="ourstory.html">Our Story</a>
+      <a href="storelocator.html">Store Locator</a>
+
+      <button aria-controls="mobileSupport" aria-expanded="false" class="mobile-accordion" data-bs-target="#mobileSupport" data-bs-toggle="collapse" type="button">
+        Support <i class="bi bi-chevron-down"></i>
+      </button>
+      <div class="collapse mobile-submenu" id="mobileSupport">
+        <a href="support.html">Help &amp; Support</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="repair.html">Watch Repair</a>
+        <a href="support.html#faq">FAQs</a>
+      </div>
+    </div>
+  </div>
+
+  <div id="scrollProgress" aria-hidden="true"></div>
+  <button id="backToTop" type="button" aria-label="Back to top"><i class="bi bi-arrow-up"></i></button>
+
+  <main>
+    <section class="price-hero">
+      <div class="container">
+        <span class="eyebrow">Alberto Watch Company / Complete Catalogue</span>
+        <h1>Our Price <em>List.</em></h1>
+        <p>Explore the complete selection of luxury, classic, smart watches and wall clocks. Discover each collection and compare its individual timepieces.</p>
+        <a class="btn-red mt-3" href="#catalogue">Explore Prices <i class="bi bi-arrow-down"></i></a>
+      </div>
+    </section>
+
+    <section class="section" id="catalogue">
+      <div class="container">
+        <span class="eyebrow">Discover the Selection</span>
+        <h2 class="heading">Every Collection. One Place.</h2>
+        <p class="muted">Prices are taken directly from the five collection pages and represent sample eProject catalogue prices.</p>
+
+        <div aria-label="Filter categories" class="category-nav">
+          <button class="active" data-category="All" type="button">All Products</button>
+          <button data-category="Luxury" type="button">Luxury</button>
+          <button data-category="Vintage" type="button">Vintage</button>
+          <button data-category="Classic" type="button">Classic</button>
+          <button data-category="Smart Watches" type="button">Smart Watches</button>
+          <button data-category="Wall Clocks" type="button">Wall Clocks</button>
+        </div>
+
+        <div class="price-toolbar">
+          <input aria-label="Search products" id="priceSearch" placeholder="Search product, style or code..." type="search" />
+          <select aria-label="Sort prices" id="priceSort">
+            <option value="featured">Featured Order</option>
+            <option value="low">Price: Low to High</option>
+            <option value="high">Price: High to Low</option>
+            <option value="name">Name: A–Z</option>
+          </select>
+          <button class="btn-line" id="resetPrice" type="button">
+            <i class="bi bi-arrow-counterclockwise"></i> Reset
+          </button>
+        </div>
+
+        <p aria-live="polite" class="muted mt-3" id="priceCount"></p>
+
+        <!-- Original Static HTML Table Layout with Direct IMG Tags -->
+        <div class="table-responsive mt-3">
+          <table class="price-table">
+            <thead>
+              <tr>
+                <th>Timepiece</th>
+                <th>Collection</th>
+                <th>Style</th>
+                <th>Price</th>
+                <th>Explore</th>
+              </tr>
+            </thead>
+            <tbody id="priceRows">
+              
+              <!-- Luxury Collection -->
+              <tr class="price-row-item" data-category="Luxury" data-name="Regent Chronograph" data-style="Statement" data-price="42500">
+                <td>
+                  <div class="item-info">
+                    <img loading="lazy" src="images/Luxury/Card 1.jpg" alt="Regent Chronograph">
+                    <div><strong>Regent Chronograph</strong><small>LUX-01</small></div>
+                  </div>
+                </td>
+                <td>Luxury</td>
+                <td>Statement</td>
+                <td class="amount">PKR 42,500</td>
+                <td><a class="view-link" href="luxury.html">View Collection ↗</a></td>
+              </tr>
+              <tr class="price-row-item" data-category="Luxury" data-name="Noir Heritage" data-style="Classic" data-price="38900">
+                <td>
+                  <div class="item-info">
+                    <img loading="lazy" src="images/Luxury/Card 2.jpg" alt="Noir Heritage">
+                    <div><strong>Noir Heritage</strong><small>LUX-02</small></div>
+                  </div>
+                </td>
+                <td>Luxury</td>
+                <td>Classic</td>
+                <td class="amount">PKR 38,900</td>
+                <td><a class="view-link" href="luxury.html">View Collection ↗</a></td>
+              </tr>
+              <tr class="price-row-item" data-category="Luxury" data-name="Titan Reserve" data-style="Modern" data-price="54500">
+                <td>
+                  <div class="item-info">
+                    <img loading="lazy" src="images/Luxury/Card 3.jpg" alt="Titan Reserve">
+                    <div><strong>Titan Reserve</strong><small>LUX-03</small></div>
+                  </div>
+                </td>
+                <td>Luxury</td>
+                <td>Modern</td>
+                <td class="amount">PKR 54,500</td>
+                <td><a class="view-link" href="luxury.html">View Collection ↗</a></td>
+              </tr>
+              <tr class="price-row-item" data-category="Luxury" data-name="Imperial Classic" data-style="Classic" data-price="46500">
+                <td>
+                  <div class="item-info">
+                    <img loading="lazy" src="images/Luxury/Card 4.jpg" alt="Imperial Classic">
+                    <div><strong>Imperial Classic</strong><small>LUX-04</small></div>
+                  </div>
+                </td>
+                <td>Luxury</td>
+                <td>Classic</td>
+                <td class="amount">PKR 46,500</td>
+                <td><a class="view-link" href="luxury.html">View Collection ↗</a></td>
+              </tr>
+              <tr class="price-row-item" data-category="Luxury" data-name="Eclipse Edition" data-style="Modern" data-price="59900">
+                <td>
+                  <div class="item-info">
+                    <img loading="lazy" src="images/Luxury/Card 5.jpg" alt="Eclipse Edition">
+                    <div><strong>Eclipse Edition</strong><small>LUX-05</small></div>
+                  </div>
+                </td>
+                <td>Luxury</td>
+                <td>Modern</td>
+                <td class="amount">PKR 59,900</td>
+                <td><a class="view-link" href="luxury.html">View Collection ↗</a></td>
+              </tr>
+              <tr class="price-row-item" data-category="Luxury" data-name="Crown Atelier" data-style="Statement" data-price="67500">
+                <td>
+                  <div class="item-info">
+                    <img loading="lazy" src="images/Luxury/Card 6.jpg" alt="Crown Atelier">
+                    <div><strong>Crown Atelier</strong><small>LUX-06</small></div>
+                  </div>
+                </td>
+                <td>Luxury</td>
+                <td>Statement</td>
+                <td class="amount">PKR 67,500</td>
+                <td><a class="view-link" href="luxury.html">View Collection ↗</a></td>
+              </tr>
+              <tr class="price-row-item" data-category="Luxury" data-name="Prestige Minimal" data-style="Classic" data-price="36900">
+                <td>
+                  <div class="item-info">
+                    <img loading="lazy" src="images/Luxury/Card 7.jpg" alt="Prestige Minimal">
+                    <div><strong>Prestige Minimal</strong><small>LUX-07</small></div>
+                  </div>
+                </td>
+                <td>Luxury</td>
+                <td>Classic</td>
+                <td class="amount">PKR 36,900</td>
+                <td><a class="view-link" href="luxury.html">View Collection ↗</a></td>
+              </tr>
+              <tr class="price-row-item" data-category="Luxury" data-name="Monarch Edition" data-style="Statement" data-price="72500">
+                <td>
+                  <div class="item-info">
+                    <img loading="lazy" src="images/Luxury/Card 8.jpg" alt="Monarch Edition">
+                    <div><strong>Monarch Edition</strong><small>LUX-08</small></div>
+                  </div>
+                </td>
+                <td>Luxury</td>
+                <td>Statement</td>
+                <td class="amount">PKR 72,500</td>
+                <td><a class="view-link" href="luxury.html">View Collection ↗</a></td>
+              </tr>
+
+              <!-- Vintage Collection -->
+              <tr class="price-row-item" data-category="Vintage" data-name="Heritage 1960" data-style="Classic" data-price="28500">
+                <td>
+                  <div class="item-info">
+                    <img loading="lazy" src="images/Vintage/Card 1.jpg"Heritage 1960">
+                    <div><strong>Heritage 1960</strong><small>VNT-01</small></div>
+                  </div>
+                </td>
+                <td>Vintage</td>
+                <td>Classic</td>
+                <td class="amount">PKR 28,500</td>
+                <td><a class="view-link" href="vintage.html">View Collection ↗</a></td>
+              </tr>
+              <tr class="price-row-item" data-category="Vintage" data-name="Old Town Chrono" data-style="Chronograph" data-price="36500">
+                <td>
+                  <div class="item-info">
+                    <img loading="lazy" src="images/Vintage/Card 2.jpg" alt="Old Town Chrono">
+                    <div><strong>Old Town Chrono</strong><small>VNT-02</small></div>
+                  </div>
+                </td>
+                <td>Vintage</td>
+                <td>Chronograph</td>
+                <td class="amount">PKR 36,500</td>
+                <td><a class="view-link" href="vintage.html">View Collection ↗</a></td>
+              </tr>
+              <tr class="price-row-item" data-category="Vintage" data-name="The Archivist" data-style="Classic" data-price="31900">
+                <td>
+                  <div class="item-info">
+                    <img loading="lazy" src="images/Vintage/Card 3.jpg" alt="The Archivist">
+                    <div><strong>The Archivist</strong><small>VNT-03</small></div>
+                  </div>
+                </td>
+                <td>Vintage</td>
+                <td>Classic</td>
+                <td class="amount">PKR 31,900</td>
+                <td><a class="view-link" href="vintage.html">View Collection ↗</a></td>
+              </tr>
+              <tr class="price-row-item" data-category="Vintage" data-name="Retro Meridian" data-style="Retro" data-price="24900">
+                <td>
+                  <div class="item-info">
+                    <img loading="lazy" src="images/Vintage/Card 4.jpg" alt="Retro Meridian">
+                    <div><strong>Retro Meridian</strong><small>VNT-04</small></div>
+                  </div>
+                </td>
+                <td>Vintage</td>
+                <td>Retro</td>
+                <td class="amount">PKR 24,900</td>
+                <td><a class="view-link" href="vintage.html">View Collection ↗</a></td>
+              </tr>
+              <tr class="price-row-item" data-category="Vintage" data-name="Midnight Heirloom" data-style="Classic" data-price="39900">
+                <td>
+                  <div class="item-info">
+                    <img loading="lazy" src="images/Vintage/Card 5.jpg" alt="Midnight Heirloom">
+                    <div><strong>Midnight Heirloom</strong><small>VNT-05</small></div>
+                  </div>
+                </td>
+                <td>Vintage</td>
+                <td>Classic</td>
+                <td class="amount">PKR 39,900</td>
+                <td><a class="view-link" href="vintage.html">View Collection ↗</a></td>
+              </tr>
+              <tr class="price-row-item" data-category="Vintage" data-name="Era 1972" data-style="Retro" data-price="29500">
+                <td>
+                  <div class="item-info">
+                    <img loading="lazy" src="images/Vintage/Card 6.jpg" alt="Era 1972">
+                    <div><strong>Era 1972</strong><small>VNT-06</small></div>
+                  </div>
+                </td>
+                <td>Vintage</td>
+                <td>Retro</td>
+                <td class="amount">PKR 29,500</td>
+                <td><a class="view-link" href="vintage.html">View Collection ↗</a></td>
+              </tr>
+              <tr class="price-row-item" data-category="Vintage" data-name="Classic Revival" data-style="Classic" data-price="27500">
+                <td>
+                  <div class="item-info">
+                    <img loading="lazy" src="images/Vintage/Card 7.jpg" alt="Classic Revival">
+                    <div><strong>Classic Revival</strong><small>VNT-07</small></div>
+                  </div>
+                </td>
+                <td>Vintage</td>
+                <td>Classic</td>
+                <td class="amount">PKR 27,500</td>
+                <td><a class="view-link" href="vintage.html">View Collection ↗</a></td>
+              </tr>
+              <tr class="price-row-item" data-category="Vintage" data-name="Chronicle Edition" data-style="Chronograph" data-price="42500">
+                <td>
+                  <div class="item-info">
+                    <img loading="lazy" src="images/Vintage/Card 8.jpg" alt="Chronicle Edition">
+                    <div><strong>Chronicle Edition</strong><small>VNT-08</small></div>
+                  </div>
+                </td>
+                <td>Vintage</td>
+                <td>Chronograph</td>
+                <td class="amount">PKR 42,500</td>
+                <td><a class="view-link" href="vintage.html">View Collection ↗</a></td>
+              </tr>
+
+              <!-- Classic Collection -->
+              <tr class="price-row-item" data-category="Classic" data-name="Heritage 38" data-style="Dress" data-price="32500">
+                <td>
+                  <div class="item-info">
+                    <img loading="lazy" src="images/Classic/Card 1.jpg" alt="Heritage 38">
+                    <div><strong>Heritage 38</strong><small>CLS-01</small></div>
+                  </div>
+                </td>
+                <td>Classic</td>
+                <td>Dress</td>
+                <td class="amount">PKR 32,500</td>
+                <td><a class="view-link" href="classic.html">View Collection ↗</a></td>
+              </tr>
+              <tr class="price-row-item" data-category="Classic" data-name="Regent Silver" data-style="Dress" data-price="38900">
+                <td>
+                  <div class="item-info">
+                    <img loading="lazy" src="images/Classic/Card 2.jpg" alt="Regent Silver">
+                    <div><strong>Regent Silver</strong><small>CLS-02</small></div>
+                  </div>
+                </td>
+                <td>Classic</td>
+                <td>Dress</td>
+                <td class="amount">PKR 38,900</td>
+                <td><a class="view-link" href="classic.html">View Collection ↗</a></td>
+              </tr>
+              <tr class="price-row-item" data-category="Classic" data-name="Everyday 40" data-style="Everyday" data-price="28900">
+                <td>
+                  <div class="item-info">
+                    <img loading="lazy" src="images/Classic/Card 3.jpg" alt="Everyday 40">
+                    <div><strong>Everyday 40</strong><small>CLS-03</small></div>
+                  </div>
+                </td>
+                <td>Classic</td>
+                <td>Everyday</td>
+                <td class="amount">PKR 28,900</td>
+                <td><a class="view-link" href="classic.html">View Collection ↗</a></td>
+              </tr>
+              <tr class="price-row-item" data-category="Classic" data-name="The Monarch" data-style="Dress" data-price="46500">
+                <td>
+                  <div class="item-info">
+                    <img loading="lazy" src="images/Classic/Card 4.jpg" alt="The Monarch">
+                    <div><strong>The Monarch</strong><small>CLS-04</small></div>
+                  </div>
+                </td>
+                <td>Classic</td>
+                <td>Dress</td>
+                <td class="amount">PKR 46,500</td>
+                <td><a class="view-link" href="classic.html">View Collection ↗</a></td>
+              </tr>
+              <tr class="price-row-item" data-category="Classic" data-name="Linea Pure" data-style="Minimal" data-price="26500">
+                <td>
+                  <div class="item-info">
+                    <img loading="lazy" src="images/Classic/Card 5.jpg" alt="Linea Pure">
+                    <div><strong>Linea Pure</strong><small>CLS-05</small></div>
+                  </div>
+                </td>
+                <td>Classic</td>
+                <td>Minimal</td>
+                <td class="amount">PKR 26,500</td>
+                <td><a class="view-link" href="classic.html">View Collection ↗</a></td>
+              </tr>
+              <tr class="price-row-item" data-category="Classic" data-name="The Oxford" data-style="Everyday" data-price="34900">
+                <td>
+                  <div class="item-info">
+                    <img loading="lazy" src="images/Classic/Card 6.jpg" alt="The Oxford">
+                    <div><strong>The Oxford</strong><small>CLS-06</small></div>
+                  </div>
+                </td>
+                <td>Classic</td>
+                <td>Everyday</td>
+                <td class="amount">PKR 34,900</td>
+                <td><a class="view-link" href="classic.html">View Collection ↗</a></td>
+              </tr>
+              <tr class="price-row-item" data-category="Classic" data-name="Studio 36" data-style="Minimal" data-price="29900">
+                <td>
+                  <div class="item-info">
+                    <img loading="lazy" src="images/Classic/Card 7.jpg" alt="Studio 36">
+                    <div><strong>Studio 36</strong><small>CLS-07</small></div>
+                  </div>
+                </td>
+                <td>Classic</td>
+                <td>Minimal</td>
+                <td class="amount">PKR 29,900</td>
+                <td><a class="view-link" href="classic.html">View Collection ↗</a></td>
+              </tr>
+              <tr class="price-row-item" data-category="Classic" data-name="Grand Classic" data-style="Everyday" data-price="42900">
+                <td>
+                  <div class="item-info">
+                    <img loading="lazy" src="images/Classic/Card 8.jpg" alt="Grand Classic">
+                    <div><strong>Grand Classic</strong><small>CLS-08</small></div>
+                  </div>
+                </td>
+                <td>Classic</td>
+                <td>Everyday</td>
+                <td class="amount">PKR 42,900</td>
+                <td><a class="view-link" href="classic.html">View Collection ↗</a></td>
+              </tr>
+
+              <!-- Smart Watches Collection -->
+              <tr class="price-row-item" data-category="Smart Watches" data-name="Pulse One" data-style="Fitness" data-price="24500">
+                <td>
+                  <div class="item-info">
+                    <img loading="lazy" src="images/Smart/Card 1.jpg" alt="Pulse One">
+                    <div><strong>Pulse One</strong><small>SMT-01</small></div>
+                  </div>
+                </td>
+                <td>Smart Watches</td>
+                <td>Fitness</td>
+                <td class="amount">PKR 24,500</td>
+                <td><a class="view-link" href="smart.html">View Collection ↗</a></td>
+              </tr>
+              <tr class="price-row-item" data-category="Smart Watches" data-name="Urban Connect" data-style="Lifestyle" data-price="32900">
+                <td>
+                  <div class="item-info">
+                    <img loading="lazy" src="images/Smart/Card 2.jpg" alt="Urban Connect">
+                    <div><strong>Urban Connect</strong><small>SMT-02</small></div>
+                  </div>
+                </td>
+                <td>Smart Watches</td>
+                <td>Lifestyle</td>
+                <td class="amount">PKR 32,900</td>
+                <td><a class="view-link" href="smart.html">View Collection ↗</a></td>
+              </tr>
+              <tr class="price-row-item" data-category="Smart Watches" data-name="Active Pro" data-style="Fitness" data-price="38900">
+                <td>
+                  <div class="item-info">
+                    <img loading="lazy" src="images/Smart/Card 3.jpg" alt="Active Pro">
+                    <div><strong>Active Pro</strong><small>SMT-03</small></div>
+                  </div>
+                </td>
+                <td>Smart Watches</td>
+                <td>Fitness</td>
+                <td class="amount">PKR 38,900</td>
+                <td><a class="view-link" href="smart.html">View Collection ↗</a></td>
+              </tr>
+              <tr class="price-row-item" data-category="Smart Watches" data-name="Summit X" data-style="Adventure" data-price="46500">
+                <td>
+                  <div class="item-info">
+                    <img loading="lazy" src="images/Smart/Card 4.jpg" alt="Summit X">
+                    <div><strong>Summit X</strong><small>SMT-04</small></div>
+                  </div>
+                </td>
+                <td>Smart Watches</td>
+                <td>Adventure</td>
+                <td class="amount">PKR 46,500</td>
+                <td><a class="view-link" href="smart.html">View Collection ↗</a></td>
+              </tr>
+              <tr class="price-row-item" data-category="Smart Watches" data-name="Nova Touch" data-style="Lifestyle" data-price="29500">
+                <td>
+                  <div class="item-info">
+                    <img loading="lazy" src="images/Smart/Card 5.jpg" alt="Nova Touch">
+                    <div><strong>Nova Touch</strong><small>SMT-05</small></div>
+                  </div>
+                </td>
+                <td>Smart Watches</td>
+                <td>Lifestyle</td>
+                <td class="amount">PKR 29,500</td>
+                <td><a class="view-link" href="smart.html">View Collection ↗</a></td>
+              </tr>
+              <tr class="price-row-item" data-category="Smart Watches" data-name="Motion S" data-style="Fitness" data-price="27500">
+                <td>
+                  <div class="item-info">
+                    <img loading="lazy" src="images/Smart/Card 6.jpg" alt="Motion S">
+                    <div><strong>Motion S</strong><small>SMT-06</small></div>
+                  </div>
+                </td>
+                <td>Smart Watches</td>
+                <td>Fitness</td>
+                <td class="amount">PKR 27,500</td>
+                <td><a class="view-link" href="smart.html">View Collection ↗</a></td>
+              </tr>
+              <tr class="price-row-item" data-category="Smart Watches" data-name="Horizon Edge" data-style="Adventure" data-price="42500">
+                <td>
+                  <div class="item-info">
+                    <img loading="lazy" src="images/Smart/Card 7.jpg" alt="Horizon Edge">
+                    <div><strong>Horizon Edge</strong><small>SMT-07</small></div>
+                  </div>
+                </td>
+                <td>Smart Watches</td>
+                <td>Adventure</td>
+                <td class="amount">PKR 42,500</td>
+                <td><a class="view-link" href="smart.html">View Collection ↗</a></td>
+              </tr>
+              <tr class="price-row-item" data-category="Smart Watches" data-name="Sync Elite" data-style="Lifestyle" data-price="49900">
+                <td>
+                  <div class="item-info">
+                    <img loading="lazy" src="images/Smart/Card 8.jpg" alt="Sync Elite">
+                    <div><strong>Sync Elite</strong><small>SMT-08</small></div>
+                  </div>
+                </td>
+                <td>Smart Watches</td>
+                <td>Lifestyle</td>
+                <td class="amount">PKR 49,900</td>
+                <td><a class="view-link" href="smart.html">View Collection ↗</a></td>
+              </tr>
+
+              <!-- Wall Clocks Collection -->
+              <tr class="price-row-item" data-category="Wall Clocks" data-name="Gallery Roman" data-style="Vintage" data-price="18900">
+                <td>
+                  <div class="item-info">
+                    <img loading="lazy" src="images/Clock/Card 1.jpg" alt="Gallery Roman">
+                    <div><strong>Gallery Roman</strong><small>CLK-01</small></div>
+                  </div>
+                </td>
+                <td>Wall Clocks</td>
+                <td>Vintage</td>
+                <td class="amount">PKR 18,900</td>
+                <td><a class="view-link" href="clocks.html">View Collection ↗</a></td>
+              </tr>
+              <tr class="price-row-item" data-category="Wall Clocks" data-name="Nordic Line" data-style="Minimal" data-price="14900">
+                <td>
+                  <div class="item-info">
+                    <img loading="lazy" src="images/Clock/Card 2.jpg" alt="Nordic Line">
+                    <div><strong>Nordic Line</strong><small>CLK-02</small></div>
+                  </div>
+                </td>
+                <td>Wall Clocks</td>
+                <td>Minimal</td>
+                <td class="amount">PKR 14,900</td>
+                <td><a class="view-link" href="clocks.html">View Collection ↗</a></td>
+              </tr>
+              <tr class="price-row-item" data-category="Wall Clocks" data-name="Metro Steel" data-style="Modern" data-price="22500">
+                <td>
+                  <div class="item-info">
+                    <img loading="lazy" src="images/Clock/Card 3.jpg" alt="Metro Steel">
+                    <div><strong>Metro Steel</strong><small>CLK-03</small></div>
+                  </div>
+                </td>
+                <td>Wall Clocks</td>
+                <td>Modern</td>
+                <td class="amount">PKR 22,500</td>
+                <td><a class="view-link" href="clocks.html">View Collection ↗</a></td>
+              </tr>
+              <tr class="price-row-item" data-category="Wall Clocks" data-name="Grand Atelier" data-style="Statement" data-price="34500">
+                <td>
+                  <div class="item-info">
+                    <img loading="lazy" src="images/Clock/Card 4.jpg" alt="Grand Atelier">
+                    <div><strong>Grand Atelier</strong><small>CLK-04</small></div>
+                  </div>
+                </td>
+                <td>Wall Clocks</td>
+                <td>Statement</td>
+                <td class="amount">PKR 34,500</td>
+                <td><a class="view-link" href="clocks.html">View Collection ↗</a></td>
+              </tr>
+              <tr class="price-row-item" data-category="Wall Clocks" data-name="Heritage Oak" data-style="Vintage" data-price="26500">
+                <td>
+                  <div class="item-info">
+                    <img loading="lazy" src="images/Clock/Card 5.jpg" alt="Heritage Oak">
+                    <div><strong>Heritage Oak</strong><small>CLK-05</small></div>
+                  </div>
+                </td>
+                <td>Wall Clocks</td>
+                <td>Vintage</td>
+                <td class="amount">PKR 26,500</td>
+                <td><a class="view-link" href="clocks.html">View Collection ↗</a></td>
+              </tr>
+              <tr class="price-row-item" data-category="Wall Clocks" data-name="Studio Twelve" data-style="Minimal" data-price="16900">
+                <td>
+                  <div class="item-info">
+                    <img loading="lazy" src="images/Clock/Card 6.jpg" alt="Studio Twelve">
+                    <div><strong>Studio Twelve</strong><small>CLK-06</small></div>
+                  </div>
+                </td>
+                <td>Wall Clocks</td>
+                <td>Minimal</td>
+                <td class="amount">PKR 16,900</td>
+                <td><a class="view-link" href="clocks.html">View Collection ↗</a></td>
+              </tr>
+              <tr class="price-row-item" data-category="Wall Clocks" data-name="Orbit Modern" data-style="Modern" data-price="23900">
+                <td>
+                  <div class="item-info">
+                    <img loading="lazy" src="images/Clock/Card 7.jpg" alt="Orbit Modern">
+                    <div><strong>Orbit Modern</strong><small>CLK-07</small></div>
+                  </div>
+                </td>
+                <td>Wall Clocks</td>
+                <td>Modern</td>
+                <td class="amount">PKR 23,900</td>
+                <td><a class="view-link" href="clocks.html">View Collection ↗</a></td>
+              </tr>
+              <tr class="price-row-item" data-category="Wall Clocks" data-name="Manor Statement" data-style="Statement" data-price="39900">
+                <td>
+                  <div class="item-info">
+                    <img loading="lazy" src="images/Clock/Card 8.jpg" alt="Manor Statement">
+                    <div><strong>Manor Statement</strong><small>CLK-08</small></div>
+                  </div>
+                </td>
+                <td>Wall Clocks</td>
+                <td>Statement</td>
+                <td class="amount">PKR 39,900</td>
+                <td><a class="view-link" href="clocks.html">View Collection ↗</a></td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+
+        <div class="note-panel mt-4">
+          <i class="bi bi-info-circle me-2"></i>
+          These are sample catalogue prices from the uploaded collection files, not verified live inventory or checkout quotations.
+        </div>
+      </div>
+    </section>
+
+    <section class="price-cta">
+      <div class="container">
+        <span class="eyebrow">More Than Just Time</span>
+        <h2>Find Your Next Timepiece.</h2>
+        <p class="mb-4">Discover the details behind every design in our collections.</p>
+        <a class="btn-red" href="collections.html">Explore All Collections <i class="bi bi-arrow-up-right"></i></a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Standard Footer -->
+  <footer>
+    <div class="container">
+      <div class="row g-5">
+        <div class="col-lg-4 col-md-6">
+          <a class="brand" href="index.html" style="color:white">ALBERTO<span>.</span></a>
+          <p class="mt-4">Discover exceptional timepieces. Luxury, craftsmanship and innovation come together in the Alberto Watch experience.</p>
+          <div class="social">
+            <a aria-label="Instagram" href="https://www.instagram.com/"><i class="bi bi-instagram"></i></a>
+            <a aria-label="Facebook" href="https://www.facebook.com/"><i class="bi bi-facebook"></i></a>
+            <a aria-label="Pinterest" href="https://www.pinterest.com/"><i class="bi bi-pinterest"></i></a>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-6 col-6">
+          <h4>Explore</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="collections.html">Collections</a></li>
+            <li><a href="technology.html">Technology</a></li>
+            <li><a href="craftsmanship.html">Craftsmanship</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="pricelist.html">Price List</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-md-6 col-6">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="ourstory.html">Our Story</a></li>
+            <li><a href="storelocator.html">Store Locator</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="sitemap.html">Site Map</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <h4>Customer Care</h4>
+          <ul>
+            <li><a href="support.html">Help &amp; Support</a></li>
+            <li><a href="repair.html">Watch Repair</a></li>
+            <li><a href="support.html#faq">Frequently Asked Questions</a></li>
+            <li><a href="contact.html">Contact Our Team</a></li>
+          </ul>
+          <p class="mt-3">Your journey with Alberto continues beyond the purchase of a timepiece.</p>
+        </div>
+      </div>
+      <div class="footer-bottom d-flex flex-wrap justify-content-between gap-2">
+        <span>© <span id="year"></span> Alberto Watch Company. All rights reserved.</span>
+        <span><a href="privacy.html">Privacy Policy</a> &nbsp; | &nbsp; <a href="terms.html">Terms &amp; Conditions</a></span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Ticker Bar -->
+  <div class="ticker">
+    <span><i class="bi bi-calendar3"></i> <span id="date"></span></span>
+    <span><i class="bi bi-clock"></i> <span id="time"></span></span>
+    <span><i class="bi bi-geo-alt"></i> <span id="location">Location not requested</span></span>
+    <button id="locationBtn">Enable Location</button>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    
+    $(function () {
+      const root = document.documentElement;
+
+      function applyTheme(t) {
+        root.dataset.theme = t;
+        localStorage.setItem('albertoTheme', t);
+        $('#themeBtn').html(t === 'dark' ? '<i class="bi bi-sun"></i>' : '<i class="bi bi-moon-stars"></i>');
+      }
+
+      applyTheme(localStorage.getItem('albertoTheme') === 'light' ? 'light' : 'dark');
+      $('#themeBtn').on('click', () => applyTheme(root.dataset.theme === 'dark' ? 'light' : 'dark'));
+
+      // Standardized Dropdowns Handlers
+      $('.nav-drop-toggle').on('click', function (e) {
+        e.stopPropagation();
+        const parent = $(this).closest('.nav-drop'), wasOpen = parent.hasClass('is-open');
+        $('.nav-drop').removeClass('is-open').find('.nav-drop-toggle').attr('aria-expanded', 'false');
+        if (!wasOpen) {
+          parent.addClass('is-open');
+          $(this).attr('aria-expanded', 'true');
+        }
+      });
+
+      $(document).on('click keydown', function (e) {
+        if (e.type === 'keydown' && e.key !== 'Escape') return;
+        if (!$(e.target).closest('.nav-drop').length) {
+          $('.nav-drop').removeClass('is-open').find('.nav-drop-toggle').attr('aria-expanded', 'false');
+        }
+      });
+
+      function cartCount() {
+        try {
+          const a = JSON.parse(localStorage.getItem('albertoCart') || '[]');
+          const n = Array.isArray(a) ? a.reduce((v, p) => v + (Number(p.quantity) || 0), 0) : 0;
+          $('#cartCount').text(n).prop('hidden', !n);
+        } catch (e) {
+          $('#cartCount').prop('hidden', true);
+        }
+      }
+      cartCount();
+      $(window).on('storage focus', cartCount);
+
+      $('#searchBtn').on('click', () => $('#priceSearch').trigger('focus'));
+
+      let category = 'All';
+
+      function filterRows() {
+        const q = $('#priceSearch').val().trim().toLowerCase();
+        const sort = $('#priceSort').val();
+        let rows = $('.price-row-item').toArray();
+        let visibleCount = 0;
+
+        rows.forEach(row => {
+          const $row = $(row);
+          const cat = $row.data('category');
+          const text = $row.text().toLowerCase();
+
+          const matchesCat = (category === 'All' || cat === category);
+          const matchesSearch = (!q || text.includes(q));
+
+          if (matchesCat && matchesSearch) {
+            $row.show();
+            visibleCount++;
+          } else {
+            $row.hide();
+          }
+        });
+
+        // Sorting
+        rows.sort((a, b) => {
+          const priceA = Number($(a).data('price'));
+          const priceB = Number($(b).data('price'));
+          const nameA = $(a).data('name');
+          const nameB = $(b).data('name');
+
+          if (sort === 'low') return priceA - priceB;
+          if (sort === 'high') return priceB - priceA;
+          if (sort === 'name') return nameA.localeCompare(nameB);
+          return 0;
+        });
+
+        $('#priceRows').append(rows);
+        $('#priceCount').text(visibleCount + ' product' + (visibleCount === 1 ? '' : 's') + ' found');
+      }
+
+      $('.category-nav button').on('click', function () {
+        category = $(this).data('category');
+        $('.category-nav button').removeClass('active');
+        $(this).addClass('active');
+        filterRows();
+      });
+
+      $('#priceSearch').on('input', filterRows);
+      $('#priceSort').on('change', filterRows);
+
+      $('#resetPrice').on('click', () => {
+        $('#priceSearch').val('');
+        $('#priceSort').val('featured');
+        category = 'All';
+        $('.category-nav button').removeClass('active').first().addClass('active');
+        filterRows();
+      });
+
+      filterRows();
+
+      function clock() {
+        const d = new Date();
+        $('#date').text(d.toLocaleDateString('en-GB', { weekday: 'short', day: '2-digit', month: 'short', year: 'numeric' }));
+        $('#time').text(d.toLocaleTimeString('en-GB'));
+      }
+      clock();
+      setInterval(clock, 1000);
+      $('#year').text(new Date().getFullYear());
+
+      $('#locationBtn').on('click', () => {
+        if (!navigator.geolocation) {
+          $('#location').text('Not supported');
+          return;
+        }
+        $('#location').text('Detecting...');
+        navigator.geolocation.getCurrentPosition(
+          p => $('#location').text(p.coords.latitude.toFixed(2) + ', ' + p.coords.longitude.toFixed(2)),
+          () => $('#location').text('Permission unavailable'),
+          { timeout: 10000 }
+        );
+      });
+    });
+  
+  </script>
+</body>
+
+</html>

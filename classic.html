@@ -1,0 +1,1674 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Classic Watches | Alberto Watch Company</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+
+  <!-- GSAP & ScrollTrigger Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+
+ <style>
+      /* Theme Variables */
+    :root {
+      --red: #A52A3A;
+      --red-hover: #84212f;
+      --rose: #D48C96;
+      --steel: #454A53;
+      --pearl: #F3F3F5;
+      --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    [data-theme=dark] {
+      --bg: #1B1D22;
+      --card: #292C32;
+      --text: #F3F3F5;
+      --muted: #B7B8BF;
+      --line: #454A53;
+      --nav: rgba(27, 29, 34, 0.9);
+      --glass: rgba(255, 255, 255, 0.03);
+    }
+
+    [data-theme=light] {
+      --bg: #F3F3F5;
+      --card: #fff;
+      --text: #1B1D22;
+      --muted: #626671;
+      --line: #D7D7DC;
+      --nav: rgba(243, 243, 245, 0.9);
+      --glass: rgba(0, 0, 0, 0.02);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box
+    }
+
+    html {
+      scroll-behavior: smooth
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      transition: background .3s, color .3s;
+      overflow-x: hidden;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    .brand {
+      font-family: 'Playfair Display', serif
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+      transition: var(--transition-smooth);
+    }
+
+    a:hover {
+      color: var(--rose)
+    }
+
+    button {
+      cursor: pointer;
+      border: none;
+      background: none;
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--rose);
+      outline-offset: 3px
+    }
+
+    .section {
+      padding: 95px 0
+    }
+
+    .eyebrow {
+      font-size: 11px;
+      color: var(--rose);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      font-weight: 700
+    }
+
+    .heading {
+      font-size: clamp(35px, 4vw, 60px);
+      margin: 12px 0 20px
+    }
+
+    .muted {
+      color: var(--muted);
+      line-height: 1.85
+    }
+
+    /* Standardized Navigation Bar matching Luxury Page */
+    .site-header {
+      position: fixed;
+      z-index: 1050;
+      top: 0;
+      width: 100%;
+      background: var(--nav);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      transition: var(--transition-smooth);
+    }
+
+    .nav-wrap {
+      min-height: 85px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      font-size: 26px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      line-height: 1;
+    }
+
+    .brand span {
+      color: var(--red);
+    }
+
+    .brand small {
+      display: block;
+      font: 8px 'DM Sans', sans-serif;
+      letter-spacing: 4px;
+      text-align: center;
+      margin-top: 6px;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    .nav-main {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+    }
+
+    .nav-main > a, .nav-drop-toggle {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 30px 0;
+      display: block;
+      color: var(--text);
+      background: transparent;
+      border: 0;
+    }
+
+    .nav-main .active, .nav-main > a:hover, .nav-drop-toggle:hover, .nav-drop-toggle[aria-expanded="true"] {
+      color: var(--red);
+    }
+
+    .nav-drop {
+      position: relative;
+    }
+
+    .drop-panel {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      min-width: 200px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      padding: 10px;
+      display: none;
+      box-shadow: 0 20px 35px rgba(0, 0, 0, 0.15);
+      z-index: 1100;
+      border-radius: 4px;
+    }
+
+    .nav-drop:hover .drop-panel, .nav-drop.is-open .drop-panel {
+      display: block;
+    }
+
+    .drop-panel a {
+      display: block;
+      padding: 10px 14px;
+      font-size: 12px;
+      border-radius: 2px;
+    }
+
+    .drop-panel a:hover {
+      background: var(--bg);
+      color: var(--red);
+    }
+
+    .nav-drop-toggle i {
+      font-size: 10px;
+      margin-left: 4px;
+      display: inline-block;
+      transition: transform 0.2s;
+    }
+
+    .nav-drop-toggle[aria-expanded="true"] i {
+      transform: rotate(180deg);
+    }
+
+    .nav-tools {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .icon-btn {
+      border: 0;
+      background: var(--glass);
+      color: var(--text);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      font-size: 18px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition-smooth);
+    }
+
+    .icon-btn:hover {
+      background: var(--line);
+      color: var(--red);
+    }
+
+    .cart-badge {
+      position: absolute;
+      top: 2px;
+      right: 2px;
+      background: var(--red);
+      color: white;
+      border-radius: 50%;
+      font: 10px 'DM Sans', sans-serif;
+      padding: 2px 6px;
+      font-weight: 700;
+    }
+
+    .cart-badge[hidden] {
+      display: none !important;
+    }
+
+    .mobile-btn {
+      display: none;
+    }
+
+    /* Standardized Mobile Offcanvas */
+    .offcanvas {
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    .offcanvas-header {
+      border-bottom: 1px solid var(--line);
+      padding: 20px;
+    }
+
+    .offcanvas-body a {
+      display: block;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--line);
+      font-weight: 600;
+    }
+
+    .mobile-accordion {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: 14px 0;
+      background: transparent;
+      border: 0;
+      border-bottom: 1px solid var(--line);
+      color: var(--text);
+      font-weight: 600;
+      text-align: left;
+    }
+
+    .mobile-accordion i {
+      transition: transform 0.2s;
+    }
+
+    .mobile-accordion[aria-expanded="true"] {
+      color: var(--rose);
+    }
+
+    .mobile-accordion[aria-expanded="true"] i {
+      transform: rotate(180deg);
+    }
+
+    .mobile-submenu {
+      padding-left: 18px;
+    }
+
+    .mobile-submenu a {
+      font-size: 13px;
+      color: var(--muted);
+      border-bottom: none;
+      padding: 10px 0;
+    }
+
+    /* Buttons & General Styles */
+    .btn-red,
+    .btn-line {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 24px;
+      font-size: 12px;
+      letter-spacing: 1.3px;
+      text-transform: uppercase;
+      font-weight: 700;
+      transition: var(--transition-smooth);
+      border: 1px solid var(--red);
+      border-radius: 4px;
+    }
+
+    .btn-red {
+      background: var(--red);
+      color: white
+    }
+
+    .btn-red:hover {
+      background: var(--red-hover);
+      color: white;
+      transform: translateY(-3px)
+    }
+
+    .btn-line {
+      background: transparent;
+      color: inherit;
+      border-color: currentColor
+    }
+
+    .btn-line:hover {
+      background: var(--red);
+      border-color: var(--red);
+      color: white
+    }
+
+    /* Classic Hero Section */
+    .lux-hero {
+      position: relative;
+      min-height: 720px;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      color: #fff;
+      background: radial-gradient(circle at 75% 35%, rgba(165, 42, 58, 0.22) 0%, transparent 55%),
+                  linear-gradient(135deg, rgba(18, 18, 22, 0.96) 0%, rgba(18, 18, 22, 0.82) 50%, rgba(18, 18, 22, 0.6) 100%),
+                  #101116;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .lux-hero-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      z-index: 0;
+      opacity: 0.55;
+    }
+
+    .lux-hero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, rgba(16, 17, 22, 0.96) 0%, rgba(16, 17, 22, 0.8) 50%, rgba(16, 17, 22, 0.4) 100%);
+      z-index: 1;
+    }
+
+    .lux-hero::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 120px;
+      background: linear-gradient(to top, var(--bg), transparent);
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .lux-hero .container {
+      position: relative;
+      z-index: 3;
+      padding-top: 130px;
+      padding-bottom: 110px;
+    }
+
+    .lux-hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 16px;
+      background: rgba(165, 42, 58, 0.15);
+      border: 1px solid rgba(212, 140, 150, 0.3);
+      border-radius: 50px;
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--rose);
+      margin-bottom: 22px;
+    }
+
+    .lux-hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(52px, 7.5vw, 108px);
+      line-height: 1.04;
+      max-width: 880px;
+      margin: 15px 0 25px;
+      font-weight: 500;
+      letter-spacing: -1px;
+    }
+
+    .lux-hero h1 em {
+      color: var(--rose);
+      font-weight: 400;
+      font-style: italic;
+    }
+
+    .lux-hero p {
+      max-width: 560px;
+      line-height: 1.95;
+      color: #d2ced2;
+      font-size: 1.1rem;
+      margin-bottom: 35px;
+    }
+
+    .lux-hero-label {
+      position: absolute;
+      bottom: 30px;
+      right: 5%;
+      font-size: 11px;
+      letter-spacing: 3px;
+      color: #aaa;
+      z-index: 3;
+    }
+
+    .lux-intro {
+      max-width: 750px;
+      margin: auto;
+      text-align: center
+    }
+
+    .lux-intro p {
+      font-size: 15px
+    }
+
+    .lux-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      margin: 35px 0;
+      border-radius: 4px;
+    }
+
+    .lux-search {
+      position: relative;
+      flex: 1;
+      min-width: 200px
+    }
+
+    .lux-search i {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted)
+    }
+
+    .lux-toolbar input,
+    .lux-toolbar select {
+      background: var(--bg);
+      color: var(--text);
+      border: 1px solid var(--line);
+      padding: 13px;
+      font-size: 13px;
+      min-height: 48px;
+      border-radius: 4px;
+    }
+
+    .lux-toolbar input {
+      padding-left: 42px;
+      width: 100%
+    }
+
+    .lux-toolbar select {
+      min-width: 155px
+    }
+
+    .lux-card {
+      height: 100%;
+      border: 1px solid var(--line);
+      background: var(--card);
+      overflow: hidden;
+      border-radius: 4px;
+      transition: transform .35s, border-color .35s, box-shadow .35s
+    }
+
+    .lux-card:hover {
+      transform: translateY(-8px);
+      border-color: var(--red);
+      box-shadow: 0 20px 40px #0002
+    }
+
+    .lux-image {
+      position: relative;
+      overflow: hidden;
+      background: #e7e7e9
+    }
+
+    .lux-image img {
+      width: 100%;
+      height: 320px;
+      object-fit: cover;
+      transition: transform .65s
+    }
+
+    .lux-card:hover .lux-image img {
+      transform: scale(1.07)
+    }
+
+    .lux-tag {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      padding: 7px 11px;
+      background: var(--red);
+      color: #fff;
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      border-radius: 2px;
+    }
+
+    .lux-body {
+      padding: 24px
+    }
+
+    .lux-body small {
+      font-size: 10px;
+      color: var(--rose);
+      letter-spacing: 2px;
+      text-transform: uppercase
+    }
+
+    .lux-body h3 {
+      font-size: 26px;
+      margin: 10px 0
+    }
+
+    .lux-body p {
+      font-size: 13px;
+      min-height: 48px
+    }
+
+    .lux-price {
+      font-weight: 700;
+      font-size: 17px;
+      color: var(--text)
+    }
+
+    .lux-actions {
+      display: flex;
+      gap: 9px;
+      margin-top: 20px
+    }
+
+    .lux-actions button {
+      flex: 1;
+      padding: 12px 8px;
+      border: 1px solid var(--red);
+      font-size: 11px;
+      letter-spacing: .6px;
+      font-weight: 700;
+      text-transform: uppercase;
+      border-radius: 4px;
+      transition: .25s
+    }
+
+    .lux-actions .details {
+      background: transparent;
+      color: var(--text)
+    }
+
+    .lux-actions .add {
+      background: var(--red);
+      color: #fff
+    }
+
+    .lux-actions button:hover {
+      transform: translateY(-3px);
+      background: var(--red-hover);
+      color: #fff
+    }
+
+    .lux-perk {
+      padding: 28px;
+      border: 1px solid var(--line);
+      height: 100%;
+      border-radius: 4px;
+      transition: .3s
+    }
+
+    .lux-perk:hover {
+      border-color: var(--red);
+      transform: translateY(-5px)
+    }
+
+    .lux-perk i {
+      font-size: 32px;
+      color: var(--red)
+    }
+
+    .lux-perk h3 {
+      font-size: 24px;
+      margin: 18px 0 12px
+    }
+
+    .lux-perk p {
+      font-size: 13px
+    }
+
+    .lux-feature {
+      background: var(--card)
+    }
+
+    .lux-feature img {
+      width: 100%;
+      height: 560px;
+      object-fit: cover
+    }
+
+    .lux-feature .copy {
+      padding: 55px clamp(25px, 6vw, 95px)
+    }
+
+    .lux-cta {
+      padding: 100px 15px;
+      text-align: center;
+      color: #fff;
+      background: linear-gradient(#121319dc, #121319e8), url('https://images.unsplash.com/photo-1508057198894-247b23fe5ade?auto=format&fit=crop&w=1800&q=85') center/cover
+    }
+
+    .lux-cta h2 {
+      font-size: clamp(38px, 5vw, 65px)
+    }
+
+    /* Footer */
+    footer {
+      background: #15161A;
+      color: #F3F3F5;
+      padding: 75px 0 0;
+      border-top: 1px solid var(--line);
+    }
+
+    footer h4 {
+      font: 700 12px 'DM Sans', sans-serif;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 22px;
+      color: var(--rose);
+    }
+
+    footer p,
+    footer a {
+      font-size: 13px;
+      color: #a7a8ae;
+      line-height: 1.9
+    }
+
+    footer a:hover {
+      color: var(--rose)
+    }
+
+    footer ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    footer li {
+      margin-bottom: 10px
+    }
+
+    .social a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid #454A53;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      margin-right: 7px;
+      color: white;
+      transition: var(--transition-smooth);
+    }
+
+    .social a:hover {
+      background: var(--red);
+      border-color: var(--red);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      margin-top: 55px;
+      padding: 22px 0;
+      font-size: 11px;
+      color: #aaa
+    }
+
+    .ticker {
+      background: var(--red);
+      color: white;
+      padding: 10px 16px;
+      text-align: center;
+      font-size: 11px;
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+      letter-spacing: 0.5px;
+    }
+
+    .ticker button {
+      background: transparent;
+      color: white;
+      border: 0;
+      text-decoration: underline;
+      font-size: 11px
+    }
+
+    .lux-dialog {
+      max-width: min(1320px, 96vw)
+    }
+
+    #luxModal .modal-content {
+      background: var(--card);
+      color: var(--text);
+      border-radius: 4px;
+      min-height: min(740px, 92vh);
+      overflow: hidden
+    }
+
+    #luxModal .modal-body>.row {
+      min-height: 650px
+    }
+
+    #luxModal .modal-body .col-md-6 {
+      display: flex;
+      flex-direction: column;
+      justify-content: center
+    }
+
+    #luxModal .lux-modal-image {
+      height: 100%;
+      min-height: 650px;
+      max-height: 80vh;
+      object-fit: cover;
+      width: 100%
+    }
+
+    #luxModal .modal-header {
+      padding: 22px 30px;
+      border-bottom: 1px solid var(--line) !important
+    }
+
+    #luxModal .heading {
+      font-size: clamp(38px, 4vw, 64px)
+    }
+
+    #luxModal .lux-price {
+      font-size: 26px;
+      margin: 24px 0
+    }
+
+    .lux-toast {
+      position: fixed;
+      z-index: 1200;
+      bottom: 25px;
+      left: 50%;
+      transform: translate(-50%, 30px);
+      opacity: 0;
+      pointer-events: none;
+      background: var(--red);
+      color: #fff;
+      padding: 13px 22px;
+      border-radius: 4px;
+      transition: .3s
+    }
+
+    .lux-toast.show {
+      opacity: 1;
+      transform: translate(-50%, 0)
+    }
+
+    /* Scroll Progress & Back to Top */
+    .scroll-progress {
+      position: fixed;
+      z-index: 1200;
+      top: 0;
+      left: 0;
+      height: 2px;
+      width: 0;
+      background: linear-gradient(90deg, var(--red), var(--rose));
+      box-shadow: 0 0 12px rgba(212,140,150,.65);
+      pointer-events: none;
+    }
+
+    .back-to-top {
+      position: fixed;
+      z-index: 1040;
+      right: 24px;
+      bottom: 24px;
+      width: 46px;
+      height: 46px;
+      border: 1px solid var(--rose);
+      border-radius: 50%;
+      color: white;
+      background: var(--red);
+      display: grid;
+      place-items: center;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(14px);
+      transition: all .4s cubic-bezier(.2,.75,.25,1);
+      box-shadow: 0 10px 28px rgba(0,0,0,.2);
+    }
+
+    .back-to-top.is-visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .back-to-top:hover {
+      transform: translateY(-5px);
+      background: var(--red-hover);
+    }
+
+    @media(max-width:1199px) {
+      .nav-main { gap: 12px; }
+      .nav-drop-toggle { font-size: 10px; }
+    }
+
+    @media(max-width:991px) {
+      .nav-main { display: none; }
+      .mobile-btn { display: flex; }
+    }
+
+    @media(max-width:767px) {
+      .lux-hero {
+        min-height: 590px
+      }
+
+      .lux-hero-label {
+        display: none
+      }
+
+      .lux-toolbar select {
+        flex: 1;
+        min-width: 130px
+      }
+
+      .lux-image img {
+        height: 270px
+      }
+
+      .lux-feature img {
+        height: 340px
+      }
+
+      .lux-feature .copy {
+        padding: 45px 22px
+      }
+
+      #luxModal .lux-modal-image {
+        min-height: 0;
+        height: 310px;
+        max-height: none
+      }
+    }
+ </style>
+
+</head>
+
+<body>
+
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+  <!-- Standardized Header -->
+  <header class="site-header">
+    <div class="container-fluid px-3 px-xl-5 nav-wrap">
+      <a href="index.html" class="brand" aria-label="Alberto Watch home">
+        ALBERTO<span>.</span>
+        <small>WATCH COMPANY</small>
+      </a>
+
+      <nav class="nav-main" aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <div class="nav-drop">
+          <button type="button" class="nav-drop-toggle" aria-expanded="false" aria-controls="collectionsDropdown">
+            All Collections <i class="bi bi-chevron-down"></i>
+          </button>
+          <div class="drop-panel" id="collectionsDropdown">
+            <a href="collections.html">All Collections</a>
+            <a href="luxury.html">Luxury</a>
+            <a href="vintage.html">Vintage</a>
+            <a href="smart.html">Smart Watches</a>
+            <a class="active" href="classic.html" aria-current="page">Classic</a>
+            <a href="clocks.html">Clocks</a>
+          </div>
+        </div>
+        <a href="technology.html">Technology</a>
+        <a href="craftsmanship.html">Craftsmanship</a>
+        <a href="ourstory.html">Our Story</a>
+        <a href="storelocator.html">Store Locator</a>
+        <div class="nav-drop">
+          <button type="button" class="nav-drop-toggle" aria-expanded="false" aria-controls="supportDropdown">
+            Support <i class="bi bi-chevron-down"></i>
+          </button>
+          <div class="drop-panel" id="supportDropdown">
+            <a href="support.html">Help &amp; Support</a>
+            <a href="contact.html">Contact Us</a>
+            <a href="repair.html">Watch Repair</a>
+            <a href="support.html#faq">FAQs</a>
+          </div>
+        </div>
+      </nav>
+
+      <div class="nav-tools">
+        <button class="icon-btn" id="searchBtn" aria-label="Search"><i class="bi bi-search"></i></button>
+        <button class="icon-btn" id="themeBtn" aria-label="Switch theme"><i class="bi bi-sun"></i></button>
+        <a class="icon-btn" href="cart.html" aria-label="Cart">
+          <i class="bi bi-bag"></i>
+          <span class="cart-badge" id="cartCount" hidden>0</span>
+        </a>
+        <button class="icon-btn mobile-btn" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu" aria-label="Open menu">
+          <i class="bi bi-list"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Standardized Mobile Offcanvas Menu -->
+  <div class="offcanvas offcanvas-end" id="mobileMenu" tabindex="-1" aria-label="Mobile navigation">
+    <div class="offcanvas-header">
+      <strong class="brand">ALBERTO<span>.</span></strong>
+      <button class="icon-btn" data-bs-dismiss="offcanvas" aria-label="Close menu"><i class="bi bi-x-lg"></i></button>
+    </div>
+    <div class="offcanvas-body">
+      <a href="index.html">Home</a>
+
+      <button type="button" class="mobile-accordion" data-bs-toggle="collapse" data-bs-target="#mobileCollections" aria-expanded="false" aria-controls="mobileCollections">
+        All Collections <i class="bi bi-chevron-down"></i>
+      </button>
+      <div class="collapse mobile-submenu" id="mobileCollections">
+        <a href="collections.html">View All Collections</a>
+        <a href="luxury.html">Luxury</a>
+        <a href="vintage.html">Vintage</a>
+        <a href="smart.html">Smart Watches</a>
+        <a class="active" href="classic.html" aria-current="page">Classic</a>
+        <a href="clocks.html">Clocks</a>
+      </div>
+
+      <a href="technology.html">Technology</a>
+      <a href="craftsmanship.html">Craftsmanship</a>
+      <a href="ourstory.html">Our Story</a>
+      <a href="storelocator.html">Store Locator</a>
+
+      <button type="button" class="mobile-accordion" data-bs-toggle="collapse" data-bs-target="#mobileSupport" aria-expanded="false" aria-controls="mobileSupport">
+        Support <i class="bi bi-chevron-down"></i>
+      </button>
+      <div class="collapse mobile-submenu" id="mobileSupport">
+        <a href="support.html">Help &amp; Support</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="repair.html">Watch Repair</a>
+        <a href="support.html#faq">FAQs</a>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <!-- Hero Section with Background Video -->
+    <section class="lux-hero">
+      <video autoplay muted loop playsinline preload="auto" class="lux-hero-video">
+        <source src="video/Classic bg.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+      <div class="lux-hero-overlay"></div>
+
+      <div class="container">
+        <div class="lux-hero-badge"><i class="bi bi-clock-history me-2"></i> Alberto Classic Collection</div>
+        <h1>Elegance <em>Never Fades.</em><br>Always in Style.</h1>
+        <p>Discover refined silhouettes, enduring dial designs and classic-inspired timepieces created to complement every occasion.</p>
+        <div class="d-flex gap-3 flex-wrap align-items-center">
+          <a class="btn-red" href="#luxCollection">Explore Classic Watches <i class="bi bi-arrow-down"></i></a>
+        </div>
+      </div>
+      <span class="lux-hero-label">TIMELESS DESIGN — ALBERTO WATCH COMPANY</span>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="lux-intro"><span class="eyebrow">An Enduring Statement</span>
+          <h2 class="heading">The Beauty of Simplicity.</h2>
+          <p class="muted">Twelve classic-inspired concepts, from understated dress watches to confident everyday pieces.</p>
+        </div>
+        <div class="row g-4 mt-4">
+          <div class="col-md-4">
+            <div class="lux-perk"><i class="bi bi-watch"></i>
+              <h3>Timeless Silhouettes</h3>
+              <p class="muted">Balanced proportions and distinctive, elegant watch profiles.</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="lux-perk"><i class="bi bi-gem"></i>
+              <h3>Refined Details</h3>
+              <p class="muted">Thoughtful dials, polished finishes and classic-inspired character.</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="lux-perk"><i class="bi bi-stars"></i>
+              <h3>Everyday Versatility</h3>
+              <p class="muted">A timeless look that moves naturally from work to occasion wear.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="luxCollection" style="background:var(--card)">
+      <div class="container">
+        <div class="d-flex flex-wrap justify-content-between align-items-end gap-3">
+          <div><span class="eyebrow">Discover the Selection</span>
+            <h2 class="heading mb-0">Classic Timepieces.</h2>
+          </div>
+          <p class="muted mb-0">Illustrative product concepts and prices for the Alberto eProject.</p>
+        </div>
+        <div class="lux-toolbar">
+          <div class="lux-search"><i class="bi bi-search"></i><input id="luxSearch" type="search"
+              placeholder="Search classic watches..." aria-label="Search classic watches"></div><select id="luxStyle"
+            aria-label="Filter by style">
+            <option value="all">All Styles</option>
+            <option value="Dress">Dress</option>
+            <option value="Everyday">Everyday</option>
+            <option value="Minimal">Minimal</option>
+          </select><select id="luxSort" aria-label="Sort watches">
+            <option value="featured">Featured</option>
+            <option value="low">Price: Low to High</option>
+            <option value="high">Price: High to Low</option>
+            <option value="name">Name: A–Z</option>
+          </select><button id="luxReset" type="button" class="btn-line"><i class="bi bi-arrow-counterclockwise"></i>
+            Reset</button>
+        </div>
+        
+        <!-- 12 CARDS CATALOGUE WITH DIRECT HTML STRUCTURE -->
+        <div id="luxGrid" class="row g-4" aria-live="polite">
+          
+          <!-- Card 1 -->
+          <div class="col-lg-3 col-md-6" data-style="Dress" data-name="Heritage 38" data-price="32500">
+            <article class="lux-card">
+              <div class="lux-image">
+                <img loading="lazy" src="images/Classic/Card 1.jpg" alt="Heritage 38">
+                <span class="lux-tag">Signature</span>
+              </div>
+              <div class="lux-body">
+                <small>Dress Collection</small>
+                <h3>Heritage 38</h3>
+                <p class="muted">A balanced dress-watch concept with an understated dial and timeless presence.</p>
+                <div class="lux-price">PKR 32,500</div>
+                <div class="lux-actions">
+                  <button class="details" type="button" onclick="openModal('Heritage 38', 'Dress / Signature', 'A balanced dress-watch concept with an understated dial and timeless presence.', 'PKR 32,500', 'images/Classic/Card 1.jpg')">View Details</button>
+                  <button class="add" type="button" onclick="luxAddDirect('Heritage 38', 32500, 'images/Classic/Card 1.jpg')"><i class="bi bi-bag-plus"></i> Add to Cart</button>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="col-lg-3 col-md-6" data-style="Dress" data-name="Regent Silver" data-price="38900">
+            <article class="lux-card">
+              <div class="lux-image">
+                <img loading="lazy" src="images/Classic/Card 2.jpg" alt="Regent Silver">
+                <span class="lux-tag">Refined</span>
+              </div>
+              <div class="lux-body">
+                <small>Dress Collection</small>
+                <h3>Regent Silver</h3>
+                <p class="muted">Classic-inspired silver-toned styling for polished occasions.</p>
+                <div class="lux-price">PKR 38,900</div>
+                <div class="lux-actions">
+                  <button class="details" type="button" onclick="openModal('Regent Silver', 'Dress / Refined', 'Classic-inspired silver-toned styling for polished occasions.', 'PKR 38,900', 'images/Classic/Card 2.jpg5')">View Details</button>
+                  <button class="add" type="button" onclick="luxAddDirect('Regent Silver', 38900, 'images/Classic/Card 2.jpg')"><i class="bi bi-bag-plus"></i> Add to Cart</button>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="col-lg-3 col-md-6" data-style="Everyday" data-name="Everyday 40" data-price="28900">
+            <article class="lux-card">
+              <div class="lux-image">
+                <img loading="lazy" src="images/Classic/Card 3.jpg" alt="Everyday 40">
+                <span class="lux-tag">Popular</span>
+              </div>
+              <div class="lux-body">
+                <small>Everyday Collection</small>
+                <h3>Everyday 40</h3>
+                <p class="muted">Versatile proportions and an easygoing, enduring aesthetic.</p>
+                <div class="lux-price">PKR 28,900</div>
+                <div class="lux-actions">
+                  <button class="details" type="button" onclick="openModal('Everyday 40', 'Everyday / Popular', 'Versatile proportions and an easygoing, enduring aesthetic.', 'PKR 28,900', 'images/Classic/Card 3.jpg')">View Details</button>
+                  <button class="add" type="button" onclick="luxAddDirect('Everyday 40', 28900, 'images/Classic/Card 3.jpg')"><i class="bi bi-bag-plus"></i> Add to Cart</button>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="col-lg-3 col-md-6" data-style="Dress" data-name="The Monarch" data-price="46500">
+            <article class="lux-card">
+              <div class="lux-image">
+                <img loading="lazy" src="images/Classic/Card 4.jpg" alt="The Monarch">
+                <span class="lux-tag">Premium</span>
+              </div>
+              <div class="lux-body">
+                <small>Dress Collection</small>
+                <h3>The Monarch</h3>
+                <p class="muted">A distinguished dress-watch concept with confident classic character.</p>
+                <div class="lux-price">PKR 46,500</div>
+                <div class="lux-actions">
+                  <button class="details" type="button" onclick="openModal('The Monarch', 'Dress / Premium', 'A distinguished dress-watch concept with confident classic character.', 'PKR 46,500', 'images/Classic/Card 4.jpg')">View Details</button>
+                  <button class="add" type="button" onclick="luxAddDirect('The Monarch', 46500, 'images/Classic/Card 4.jpg')"><i class="bi bi-bag-plus"></i> Add to Cart</button>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <!-- Card 5 -->
+          <div class="col-lg-3 col-md-6" data-style="Minimal" data-name="Linea Pure" data-price="26500">
+            <article class="lux-card">
+              <div class="lux-image">
+                <img loading="lazy" src="images/Classic/Card 5.jpg" alt="Linea Pure">
+                <span class="lux-tag">Minimal</span>
+              </div>
+              <div class="lux-body">
+                <small>Minimal Collection</small>
+                <h3>Linea Pure</h3>
+                <p class="muted">A clean dial and subtle details inspired by minimalist watchmaking.</p>
+                <div class="lux-price">PKR 26,500</div>
+                <div class="lux-actions">
+                  <button class="details" type="button" onclick="openModal('Linea Pure', 'Minimal / Minimal', 'A clean dial and subtle details inspired by minimalist watchmaking.', 'PKR 26,500', 'images/Classic/Card 5.jpg')">View Details</button>
+                  <button class="add" type="button" onclick="luxAddDirect('Linea Pure', 26500, 'images/Classic/Card 5.jpg')"><i class="bi bi-bag-plus"></i> Add to Cart</button>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <!-- Card 6 -->
+          <div class="col-lg-3 col-md-6" data-style="Everyday" data-name="The Oxford" data-price="34900">
+            <article class="lux-card">
+              <div class="lux-image">
+                <img loading="lazy" src="images/Classic/Card 6.jpg" alt="The Oxford">
+                <span class="lux-tag">Featured</span>
+              </div>
+              <div class="lux-body">
+                <small>Everyday Collection</small>
+                <h3>The Oxford</h3>
+                <p class="muted">A sophisticated everyday design with familiar, timeless appeal.</p>
+                <div class="lux-price">PKR 34,900</div>
+                <div class="lux-actions">
+                  <button class="details" type="button" onclick="openModal('The Oxford', 'Everyday / Featured', 'A sophisticated everyday design with familiar, timeless appeal.', 'PKR 34,900', 'images/Classic/Card 6.jpg')">View Details</button>
+                  <button class="add" type="button" onclick="luxAddDirect('The Oxford', 34900, 'images/Classic/Card 6.jpg')"><i class="bi bi-bag-plus"></i> Add to Cart</button>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <!-- Card 7 -->
+          <div class="col-lg-3 col-md-6" data-style="Minimal" data-name="Studio 36" data-price="29900">
+            <article class="lux-card">
+              <div class="lux-image">
+                <img loading="lazy" src="images/Classic/Card 7.jpg" alt="Studio 36">
+                <span class="lux-tag">New</span>
+              </div>
+              <div class="lux-body">
+                <small>Minimal Collection</small>
+                <h3>Studio 36</h3>
+                <p class="muted">Compact classic-inspired proportions with a quietly modern edge.</p>
+                <div class="lux-price">PKR 29,900</div>
+                <div class="lux-actions">
+                  <button class="details" type="button" onclick="openModal('Studio 36', 'Minimal / New', 'Compact classic-inspired proportions with a quietly modern edge.', 'PKR 29,900', 'images/Classic/Card 7.jpg')">View Details</button>
+                  <button class="add" type="button" onclick="luxAddDirect('Studio 36', 29900, 'images/Classic/Card 7.jpg')"><i class="bi bi-bag-plus"></i> Add to Cart</button>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <!-- Card 8 -->
+          <div class="col-lg-3 col-md-6" data-style="Everyday" data-name="Grand Classic" data-price="42900">
+            <article class="lux-card">
+              <div class="lux-image">
+                <img loading="lazy" src="images/Classic/Card 8.jpg" alt="Grand Classic">
+                <span class="lux-tag">Iconic</span>
+              </div>
+              <div class="lux-body">
+                <small>Everyday Collection</small>
+                <h3>Grand Classic</h3>
+                <p class="muted">A statement timepiece concept balancing tradition and versatility.</p>
+                <div class="lux-price">PKR 42,900</div>
+                <div class="lux-actions">
+                  <button class="details" type="button" onclick="openModal('Grand Classic', 'Everyday / Iconic', 'A statement timepiece concept balancing tradition and versatility.', 'PKR 42,900', 'images/Classic/Card 8.jpg')">View Details</button>
+                  <button class="add" type="button" onclick="luxAddDirect('Grand Classic', 42900, 'images/Classic/Card 8.jpg')"><i class="bi bi-bag-plus"></i> Add to Cart</button>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <!-- Card 9 -->
+          <div class="col-lg-3 col-md-6" data-style="Dress" data-name="Kensington Gold" data-price="39500">
+            <article class="lux-card">
+              <div class="lux-image">
+                <img loading="lazy" src="images/Classic/Card 9.jpg" alt="Kensington Gold">
+                <span class="lux-tag">Refined</span>
+              </div>
+              <div class="lux-body">
+                <small>Dress Collection</small>
+                <h3>Kensington Gold</h3>
+                <p class="muted">Warm gold-toned accenting with fine guilloché detailing for timeless charm.</p>
+                <div class="lux-price">PKR 39,500</div>
+                <div class="lux-actions">
+                  <button class="details" type="button" onclick="openModal('Kensington Gold', 'Dress / Refined', 'Warm gold-toned accenting with fine guilloché detailing for timeless charm.', 'PKR 39,500', 'images/Classic/Card 9.jpg')">View Details</button>
+                  <button class="add" type="button" onclick="luxAddDirect('Kensington Gold', 39500, 'images/Classic/Card 9.jpg')"><i class="bi bi-bag-plus"></i> Add to Cart</button>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <!-- Card 10 -->
+          <div class="col-lg-3 col-md-6" data-style="Everyday" data-name="Belgrave Automatic" data-price="45000">
+            <article class="lux-card">
+              <div class="lux-image">
+                <img loading="lazy" src="images/Classic/Card 10.jpg" alt="Belgrave Automatic">
+                <span class="lux-tag">Popular</span>
+              </div>
+              <div class="lux-body">
+                <small>Everyday Collection</small>
+                <h3>Belgrave Automatic</h3>
+                <p class="muted">Smooth automatic mechanical movement wrapped in traditional casing.</p>
+                <div class="lux-price">PKR 45,000</div>
+                <div class="lux-actions">
+                  <button class="details" type="button" onclick="openModal('Belgrave Automatic', 'Everyday / Popular', 'Smooth automatic mechanical movement wrapped in traditional casing.', 'PKR 45,000', 'images/Classic/Card 10.jpg')">View Details</button>
+                  <button class="add" type="button" onclick="luxAddDirect('Belgrave Automatic', 45000, 'images/Classic/Card 10.jpg')"><i class="bi bi-bag-plus"></i> Add to Cart</button>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <!-- Card 11 -->
+          <div class="col-lg-3 col-md-6" data-style="Minimal" data-name="Chelsea Slim" data-price="27500">
+            <article class="lux-card">
+              <div class="lux-image">
+                <img loading="lazy" src="images/Classic/Card 11.jpg" alt="Chelsea Slim">
+                <span class="lux-tag">Minimal</span>
+              </div>
+              <div class="lux-body">
+                <small>Minimal Collection</small>
+                <h3>Chelsea Slim</h3>
+                <p class="muted">Ultra-slim stainless case profile designed to sit effortlessly under dress cuffs.</p>
+                <div class="lux-price">PKR 27,500</div>
+                <div class="lux-actions">
+                  <button class="details" type="button" onclick="openModal('Chelsea Slim', 'Minimal / Minimal', 'Ultra-slim stainless case profile designed to sit effortlessly under dress cuffs.', 'PKR 27,500', 'images/Classic/Card 11.jpg')">View Details</button>
+                  <button class="add" type="button" onclick="luxAddDirect('Chelsea Slim', 27500, 'images/Classic/Card 11.jpg')"><i class="bi bi-bag-plus"></i> Add to Cart</button>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <!-- Card 12 -->
+          <div class="col-lg-3 col-md-6" data-style="Everyday" data-name="Windsor Chrono" data-price="37800">
+            <article class="lux-card">
+              <div class="lux-image">
+                <img loading="lazy" src="images/Classic/Card 12.jpg" alt="Windsor Chrono">
+                <span class="lux-tag">Featured</span>
+              </div>
+              <div class="lux-body">
+                <small>Everyday Collection</small>
+                <h3>Windsor Chrono</h3>
+                <p class="muted">Vintage chronograph dial aesthetic with precision classic hour markers.</p>
+                <div class="lux-price">PKR 37,800</div>
+                <div class="lux-actions">
+                  <button class="details" type="button" onclick="openModal('Windsor Chrono', 'Everyday / Featured', 'Vintage chronograph dial aesthetic with precision classic hour markers.', 'PKR 37,800', 'images/Classic/Card 12.jpg')">View Details</button>
+                  <button class="add" type="button" onclick="luxAddDirect('Windsor Chrono', 37800, 'images/Classic/Card 12.jpg')"><i class="bi bi-bag-plus"></i> Add to Cart</button>
+                </div>
+              </div>
+            </article>
+          </div>
+
+        </div>
+        <p id="luxCount" class="muted mt-4"></p>
+      </div>
+    </section>
+
+    <section class="lux-feature">
+      <div class="container-fluid p-0">
+        <div class="row g-0 align-items-center">
+          <div class="col-lg-6"><img loading="lazy"
+              src="images/Classic/Footer.jpg"
+              alt="Classic wristwatch detail"></div>
+          <div class="col-lg-6">
+            <div class="copy"><span class="eyebrow">The Alberto Philosophy</span>
+              <h2 class="heading">Quiet Confidence. Lasting Impression.</h2>
+              <p class="muted">A classic watch is more than an accessory: its carefully considered design is a lasting expression of personal style.</p>
+              <p class="muted">Explore the craft and attention to detail behind every remarkable timepiece.</p><a
+                class="btn-red mt-3" href="craftsmanship.html">Explore Craftsmanship <i
+                  class="bi bi-arrow-up-right"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <section class="lux-cta">
+      <div class="container"><span class="eyebrow">Discover More</span>
+        <h2>Find Your Signature Timepiece.</h2>
+        <p class="mx-auto mb-4" style="max-width:540px;color:#ddd;line-height:1.9">Explore the full Alberto collection and find a design that stays relevant beyond the seasons.</p><a href="collections.html" class="btn-red">View All Collections <i class="bi bi-arrow-up-right"></i></a>
+      </div>
+    </section>
+  </main>
+
+  <div class="modal fade" id="luxModal" tabindex="-1" aria-labelledby="luxModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered lux-dialog">
+      <div class="modal-content">
+        <div class="modal-header border-0"><span class="eyebrow">Alberto / Classic Collection</span><button
+            class="icon-btn" type="button" data-bs-dismiss="modal" aria-label="Close"><i
+              class="bi bi-x-lg"></i></button></div>
+        <div class="modal-body p-0">
+          <div class="row g-0 align-items-center">
+            <div class="col-md-6"><img class="lux-modal-image" id="luxModalImg" src="" alt="Classic Watch Modal Image" loading="lazy"></div>
+            <div class="col-md-6 p-4 p-lg-5"><span class="eyebrow" id="luxModalStyle"></span>
+              <h2 class="heading" id="luxModalTitle"></h2>
+              <p class="muted" id="luxModalDesc"></p>
+              <p class="lux-price" id="luxModalPrice"></p>
+              <div class="d-flex flex-wrap gap-3 mt-4"><button type="button" class="btn-red" id="luxModalAdd">Add to
+                  Cart <i class="bi bi-bag-plus"></i></button><a href="cart.html" class="btn-line">View Cart <i
+                    class="bi bi-arrow-up-right"></i></a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="luxToast" class="lux-toast" role="status" aria-live="polite"></div>
+
+  <!-- Standardized Footer -->
+  <footer>
+    <div class="container">
+      <div class="row g-5">
+        <div class="col-lg-4 col-md-6"><a class="brand" href="index.html" style="color:white">ALBERTO<span>.</span></a>
+          <p class="mt-4">Discover exceptional timepieces. Luxury, craftsmanship and innovation come together in the Alberto Watch experience.</p>
+          <div class="social"><a href="https://www.instagram.com/" aria-label="Instagram"><i
+                class="bi bi-instagram"></i></a><a href="https://www.facebook.com/" aria-label="Facebook"><i
+                class="bi bi-facebook"></i></a><a href="https://www.pinterest.com/" aria-label="Pinterest"><i
+                class="bi bi-pinterest"></i></a></div>
+        </div>
+        <div class="col-lg-2 col-md-6 col-6">
+          <h4>Explore</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="collections.html">Collections</a></li>
+            <li><a href="technology.html">Technology</a></li>
+            <li><a href="craftsmanship.html">Craftsmanship</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="pricelist.html">Price List</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-md-6 col-6">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="ourstory.html">Our Story</a></li>
+            <li><a href="storelocator.html">Store Locator</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="sitemap.html">Site Map</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <h4>Customer Care</h4>
+          <ul>
+            <li><a href="support.html">Help & Support</a></li>
+            <li><a href="repair.html">Watch Repair</a></li>
+            <li><a href="support.html#faq">Frequently Asked Questions</a></li>
+            <li><a href="contact.html">Contact Our Team</a></li>
+          </ul>
+          <p class="mt-3">Your journey with Alberto continues beyond the purchase of a timepiece.</p>
+        </div>
+      </div>
+      <div class="footer-bottom d-flex flex-wrap justify-content-between gap-2"><span>© <span id="year"></span> Alberto Watch Company. All rights reserved.</span><span><a href="privacy.html">Privacy Policy</a> &nbsp; | &nbsp; <a href="terms.html">Terms & Conditions</a></span></div>
+    </div>
+  </footer>
+
+  <button class="back-to-top" id="backToTop" aria-label="Back to top"><i class="bi bi-arrow-up"></i></button>
+
+  <!-- Ticker Bar -->
+  <div class="ticker">
+    <span><i class="bi bi-calendar3"></i> <span id="date"></span></span>
+    <span><i class="bi bi-clock"></i> <span id="time"></span></span>
+    <span><i class="bi bi-geo-alt"></i> <span id="location">Location not requested</span></span>
+    <button id="locationBtn">Enable Location</button>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    
+    let currentModalData = null;
+    const luxModal = window.bootstrap ? new bootstrap.Modal(document.getElementById('luxModal')) : {
+      show() { document.getElementById('luxModal').style.display = 'block'; },
+      hide() { document.getElementById('luxModal').style.display = 'none'; }
+    };
+    let toastTimer;
+
+    function luxNotify(message) {
+      $('#luxToast').text(message).addClass('show'); 
+      clearTimeout(toastTimer); 
+      toastTimer = setTimeout(() => $('#luxToast').removeClass('show'), 2600);
+    }
+
+    function luxAddDirect(name, price, image) {
+      let cart = []; 
+      try {
+        const saved = JSON.parse(localStorage.getItem('albertoCart') || '[]'); 
+        if (Array.isArray(saved)) cart = saved;
+      } catch (e) { } 
+      
+      const item = cart.find(x => x.name === name); 
+      if (item) {
+        item.quantity = (Number(item.quantity) || 0) + 1; 
+      } else {
+        cart.push({id: name.toLowerCase().replace(/\s+/g, '-'), name: name, title: name, price: price, image: image, quantity: 1});
+      } 
+
+      try {
+        localStorage.setItem('albertoCart', JSON.stringify(cart)); 
+        if (window.updateCartCount) window.updateCartCount(); 
+        luxNotify(name + ' added to cart');
+      } catch (e) {
+        luxNotify('Cart could not be saved in this browser');
+      } 
+    }
+
+    function openModal(name, styleTag, desc, priceStr, image) {
+      $('#luxModalImg').attr({src: image, alt: name}); 
+      $('#luxModalStyle').text(styleTag); 
+      $('#luxModalTitle').text(name); 
+      $('#luxModalDesc').text(desc); 
+      $('#luxModalPrice').text(priceStr); 
+      
+      const rawPrice = Number(priceStr.replace(/[^0-9]/g, ''));
+      currentModalData = { name, price: rawPrice, image }; 
+      luxModal.show();
+    }
+
+    $(function () {
+      const root = document.documentElement;
+
+      function applyTheme(t) {
+        root.dataset.theme = t;
+        localStorage.setItem('albertoTheme', t);
+        $('#themeBtn')
+          .html(t === 'dark' ? '<i class="bi bi-sun"></i>' : '<i class="bi bi-moon-stars"></i>')
+          .attr('aria-label', t === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+      }
+
+      applyTheme(localStorage.getItem('albertoTheme') === 'light' ? 'light' : 'dark');
+      $('#themeBtn').on('click', () => applyTheme(root.dataset.theme === 'dark' ? 'light' : 'dark'));
+
+      function updateCartCount() {
+        try {
+          const cart = JSON.parse(localStorage.getItem('albertoCart') || '[]');
+          const count = Array.isArray(cart) ? cart.reduce((n, p) => n + (Number(p.quantity) || 0), 0) : 0;
+          $('#cartCount').text(count).prop('hidden', count === 0);
+        } catch(e) {
+          $('#cartCount').prop('hidden', true);
+        }
+      }
+      window.updateCartCount = updateCartCount;
+      updateCartCount();
+      $(window).on('storage focus', updateCartCount);
+
+      // Standardized Navigation Dropdowns Handlers matching Luxury Page
+      $('.nav-drop-toggle').on('click', function(e) {
+        e.stopPropagation();
+        const parent = $(this).closest('.nav-drop'), wasOpen = parent.hasClass('is-open');
+        $('.nav-drop').removeClass('is-open').find('.nav-drop-toggle').attr('aria-expanded', 'false');
+        if (!wasOpen) {
+          parent.addClass('is-open');
+          $(this).attr('aria-expanded', 'true');
+        }
+      });
+
+      $(document).on('click keydown', function(e) {
+        if (e.type === 'keydown' && e.key !== 'Escape') return;
+        if (!$(e.target).closest('.nav-drop').length) {
+          $('.nav-drop').removeClass('is-open').find('.nav-drop-toggle').attr('aria-expanded', 'false');
+        }
+      });
+
+      /* ===== GSAP CINEMATIC SCROLL ANIMATIONS ===== */
+      const motionReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      if (window.gsap && window.ScrollTrigger && !motionReduced) {
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Hero Intro Animation
+        const tl = gsap.timeline({ defaults: { ease: 'power4.out' } });
+        tl.fromTo('.lux-hero-badge', { y: 25, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8 }, .1)
+          .fromTo('.lux-hero h1', { y: 55, opacity: 0, rotateX: -10 }, { y: 0, opacity: 1, rotateX: 0, duration: 1.1 }, .3)
+          .fromTo('.lux-hero p', { y: 25, opacity: 0 }, { y: 0, opacity: 1, duration: .8 }, .5)
+          .fromTo('.lux-hero .btn-red', { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: .7 }, .7);
+
+        // Scroll reveals for sections & elements
+        const cinematicTargets = document.querySelectorAll(
+          '.lux-intro, .lux-perk, .lux-toolbar, .lux-card, .lux-feature img, .lux-feature .copy > *, .lux-cta, footer .row > div'
+        );
+        cinematicTargets.forEach((el, i) => {
+          gsap.set(el, { autoAlpha: 0, y: 35 });
+          ScrollTrigger.create({
+            trigger: el,
+            start: 'top 88%',
+            once: true,
+            onEnter: () => gsap.to(el, {
+              autoAlpha: 1, y: 0, duration: 1.05,
+              delay: (i % 3) * 0.08, ease: 'power3.out',
+              overwrite: true
+            })
+          });
+        });
+      }
+
+      /* ===== SCROLL PROGRESS & BACK TO TOP ===== */
+      const progress = document.getElementById('scrollProgress');
+      const backTop = document.getElementById('backToTop');
+      let scrollTicking = false;
+
+      function updateScrollEffects() {
+        const max = document.documentElement.scrollHeight - window.innerHeight;
+        const amount = max > 0 ? (window.scrollY / max) * 100 : 0;
+        if (progress) progress.style.width = amount + '%';
+        document.querySelector('.site-header')?.classList.toggle('is-scrolled', window.scrollY > 24);
+        backTop?.classList.toggle('is-visible', window.scrollY > 500);
+        scrollTicking = false;
+      }
+
+      window.addEventListener('scroll', () => {
+        if (!scrollTicking) {
+          requestAnimationFrame(updateScrollEffects);
+          scrollTicking = true;
+        }
+      }, { passive: true });
+      updateScrollEffects();
+
+      backTop?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: motionReduced ? 'auto' : 'smooth' }));
+
+      $('#searchBtn').on('click', function () {const q = prompt('Search watch collections:'); if (q && q.trim()) location.href = 'collections.html?search=' + encodeURIComponent(q.trim())});
+      function clock() {const d = new Date(); $('#date').text(d.toLocaleDateString('en-GB', {weekday: 'short', day: '2-digit', month: 'short', year: 'numeric'})); $('#time').text(d.toLocaleTimeString('en-GB'))} clock(); setInterval(clock, 1000); $('#year').text(new Date().getFullYear());
+      $('#locationBtn').on('click', function () {if (!navigator.geolocation) {$('#location').text('Not supported'); return } $('#location').text('Detecting...'); navigator.geolocation.getCurrentPosition(p => $('#location').text(p.coords.latitude.toFixed(2) + ', ' + p.coords.longitude.toFixed(2)), () => $('#location').text('Permission unavailable'), {timeout: 10000, maximumAge: 300000})});
+
+      function filterCards() {
+        const q = $('#luxSearch').val().trim().toLowerCase();
+        const style = $('#luxStyle').val();
+        const cards = $('#luxGrid > div');
+        let visibleCount = 0;
+
+        cards.each(function() {
+          const cardEl = $(this);
+          const cardStyle = cardEl.data('style');
+          const cardText = cardEl.text().toLowerCase();
+
+          const matchesStyle = (style === 'all' || cardStyle === style);
+          const matchesSearch = (!q || cardText.includes(q));
+
+          if (matchesStyle && matchesSearch) {
+            cardEl.show();
+            visibleCount++;
+          } else {
+            cardEl.hide();
+          }
+        });
+
+        $('#luxCount').text(visibleCount + ' timepiece' + (visibleCount === 1 ? '' : 's') + ' found');
+        if (window.ScrollTrigger) ScrollTrigger.refresh();
+      }
+
+      $('#luxSearch').on('input', filterCards);
+      $('#luxStyle').on('change', filterCards);
+
+      $('#luxSort').on('change', function() {
+        const sortVal = $(this).val();
+        const grid = $('#luxGrid');
+        const cards = grid.children('.col-lg-3').get();
+
+        cards.sort(function(a, b) {
+          const priceA = Number($(a).data('price'));
+          const priceB = Number($(b).data('price'));
+          const nameA = $(a).data('name');
+          const nameB = $(b).data('name');
+
+          if (sortVal === 'low') return priceA - priceB;
+          if (sortVal === 'high') return priceB - priceA;
+          if (sortVal === 'name') return nameA.localeCompare(nameB);
+          return 0;
+        });
+
+        $.each(cards, function(idx, el) {
+          grid.append(el);
+        });
+      });
+
+      $('#luxReset').on('click', () => {
+        $('#luxSearch').val('');
+        $('#luxStyle').val('all');
+        $('#luxSort').val('featured');
+        filterCards();
+      });
+
+      $('#luxModalAdd').on('click', () => {
+        if (currentModalData) {
+          luxAddDirect(currentModalData.name, currentModalData.price, currentModalData.image);
+          luxModal.hide();
+        }
+      });
+
+      filterCards();
+    });
+  </script>
+</body>
+
+</html>
